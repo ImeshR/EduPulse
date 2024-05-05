@@ -1,5 +1,4 @@
 import mongoose from "mongoose";
-import { first } from "rxjs";
 
 const userSchema = new mongoose.Schema({
   firstName: { type: String, required: true },

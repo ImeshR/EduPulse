@@ -1,0 +1,38 @@
+version: '3'
+
+services:
+  user-managment:
+    build:
+      context: ./user-managment
+      dockerfile: Dockerfile
+    ports:
+      - "${USER_MANAGMENT_PORT}:5050"  # Map port 5050 of the container to specified host port
+    environment:
+      PORT: 5050
+      MONGODB_URI: "mongodb+srv://imeshworkspace:root@cluster0.hlpymcv.mongodb.net/EduPulse?retryWrites=true&w=majority&appName=Cluster0"
+      JWT_SECRET: "j5QYJQtGR2XtriOcAssSaGAf0YO1Cmv1"
+    depends_on:
+      - mongo  # Dependency on MongoDB service
+
+  course-management:
+    build:
+      context: ./course-management
+      dockerfile: Dockerfile
+    ports:
+      - "${COURSE_MANAGEMENT_PORT}:7070"  # Map port 7070 of the container to specified host port
+    environment:
+      PORT: 7070
+      MONGODB_URI: "mongodb+srv://imeshworkspace:root@cluster0.hlpymcv.mongodb.net/EduPulse?retryWrites=true&w=majority&appName=Cluster0"
+      JWT_SECRET: "j5QYJQtGR2XtriOcAssSaGAf0YO1Cmv1"
+    depends_on:
+      - mongo  # Dependency on MongoDB service
+
+  mongo:
+    image: mongo:latest
+    ports:
+      - "27017:27017"  # Expose MongoDB port
+    volumes:
+      - mongodb_data:/data/db  # Persist MongoDB data
+
+volumes:
+  mongodb_data:
