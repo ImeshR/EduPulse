@@ -1,4 +1,4 @@
-import User from "../models/User.js";
+import User from "../models/Users.js";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
@@ -13,28 +13,33 @@ if (!jwtSecret) {
 
 const registerUser = async (userData) => {
   try {
-    const { username, password, role } = userData;
+    const { firstName, lastName, email, password, role } = userData;
 
     // Check if user already exists
-    const user = await User.findOne({ username });
+    const user = await User.findOne({ email: userData.email });
 
     if (user) {
       return { error: "User already exists" };
     }
     // Hash password
     const hashedPassword = await bcrypt.hash(password, 10);
-    const newUser = new User({ username, password: hashedPassword, role });
-    await newUser.save();
+    const newUser = new User({
+      firstName: userData.firstName,
+      lastName: userData.lastName,
+      email: userData.email,
+      password: hashedPassword,
+      role: role || "user",
+    });
     return { id: newUser._id, username: newUser.username, role: newUser.role };
   } catch (error) {
     throw new Error("Failed to register user");
   }
 };
 
-const loginUser = async (username, password) => {
+const loginUser = async (email, password) => {
   try {
     // Find user by username
-    const user = await User.findOne({ username });
+    const user = await User.findOne({ email });
     if (!user) {
       throw new Error("Invalid username or password");
     }
@@ -45,7 +50,13 @@ const loginUser = async (username, password) => {
     }
     // Generate JWT token
     const token = jwt.sign(
-      { id: user._id, username: user.username, role: user.role },
+      {
+        id: user._id,
+        firstName: user.firstName,
+        lastName: user.lastName,
+        email: user.email,
+        role: user.role,
+      },
       jwtSecret,
       { expiresIn: "1h" }
     );
