@@ -4,6 +4,7 @@ import dotenv from "dotenv";
 import bodyParser from "body-parser";
 import mongoose from "mongoose";
 import cookieParser from "cookie-parser";
+import authController from "./middlewares/authMiddleware.js";
 
 const app = express();
 
@@ -33,6 +34,10 @@ connection.once("open", () => {
 mongoose.connection.on("disconnected", () => {
   console.log("Mongodb disconnected!");
 });
+
+
+//routes
+app.use('/api/auth', authController);
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
