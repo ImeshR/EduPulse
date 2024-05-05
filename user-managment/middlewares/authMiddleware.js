@@ -12,13 +12,16 @@ export const authenticateUser = (req, res, next) => {
     return res.status(401).json({ message: "No token provided" });
   }
 
-  // Remove Bearer from token
-  const tokenString = token.split(" ");
-  const NoBtoken = tokenString[1];
+  // Check if token starts with "Bearer "
+  if (!token.startsWith("Bearer ")) {
+    return res.status(401).json({ message: "Invalid token format" });
+  }
 
+  // Remove "Bearer " prefix from token
+  const tokenString = token.substring(7);
 
   // Verify token
-  jwt.verify(NoBtoken, jwtSecret, (err, user) => {
+  jwt.verify(tokenString, jwtSecret, (err, user) => {
     if (err) {
       console.error(err);
       return res.status(403).json({ message: "Unauthorized" });

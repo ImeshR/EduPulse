@@ -1,26 +1,20 @@
-// models/User.js
-
-const mongoose = require('mongoose');
+import mongoose from "mongoose";
+import { first } from "rxjs";
 
 const userSchema = new mongoose.Schema({
-  username: {
-    type: String,
-    required: true,
-  },
+  firstName: { type: String, required: true },
+  lastName: { type: String, required: true },
   email: {
     type: String,
     required: true,
+    unique: true,
   },
+  password: { type: String, required: true },
   role: {
     type: String,
-    required: true,
-  },
-  password: {
-    type: String,
-    required: true,
+    enum: ["user", "admin", "creator"],
+    default: "user",
   },
 });
 
-const User = mongoose.model('User', userSchema);
-
-module.exports = User;
+export default mongoose.model("User", userSchema);
