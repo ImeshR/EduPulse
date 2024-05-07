@@ -1,5 +1,5 @@
 import express from "express";
-import { getAllUsers, updateUser } from "../services/userManagementService.js";
+import { getAllUsers, updateUser,findUserById ,removeUser, getUserCountByRole } from "../services/userManagementService.js";
 
 const router = express.Router();
 
@@ -14,6 +14,26 @@ router.get("/getAll", async (req, res) => {
   }
 });
 
+//find user details by id
+router.get("/find/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const user = await findUserById(id);
+    res.json(user);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+//get user count by role
+router.get("/countByRole", async (req, res) => {
+  try {
+    const userCount = await getUserCountByRole();
+    res.json(userCount);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
 
 //update user by id
 router.put("/update/:id", async (req, res) => {
