@@ -12,6 +12,37 @@ const getAllUsers = async () => {
   }
 };
 
+//find user details by id
+const findUserById = async (id) => {
+  try {
+    const user = await User.findById(id);
+    return user;
+  } catch (error) {
+    return {
+      message: "Failed to get user",
+    };
+  }
+};
+
+//get user count and return by role
+const getUserCountByRole = async () => {
+  try {
+    const userCount = await User.aggregate([
+      {
+        $group: {
+          _id: "$role",
+          count: { $sum: 1 },
+        },
+      },
+    ]);
+    return userCount;
+  } catch (error) {
+    return {
+      message: "Failed to get user count by role",
+    };
+  }
+};
+
 //update user by id
 const updateUser = async () => {
   try {
@@ -39,7 +70,7 @@ const removeUser = async () => {
     return {
       message: "Failed to delete user",
     };
-  } 
+  }
 };
 
-export { getAllUsers, updateUser, removeUser };
+export { getAllUsers, findUserById ,updateUser, removeUser, getUserCountByRole };
