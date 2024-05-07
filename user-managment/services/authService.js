@@ -24,13 +24,16 @@ const registerUser = async (userData) => {
     // Hash password
     const hashedPassword = await bcrypt.hash(password, 10);
     const newUser = new User({
-      firstName: userData.firstName,
-      lastName: userData.lastName,
-      email: userData.email,
+      firstName,
+      lastName,
+      email,
       password: hashedPassword,
-      role: role || "user",
+      role : role || "user",
     });
-    return { id: newUser._id, username: newUser.username, role: newUser.role };
+    return { 
+      user: await newUser.save(),
+      message: "User registered successfully"
+     };
   } catch (error) {
     throw new Error("Failed to register user");
   }

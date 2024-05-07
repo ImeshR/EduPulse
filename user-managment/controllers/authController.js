@@ -7,8 +7,8 @@ const router = express.Router();
 // Register a new user
 router.post('/register', async (req, res) => {
   try {
-    const { username, password, role } = req.body;
-    const newUser = await registerUser({ username, password, role });
+    const { firstName, lastName, email, password, role } = req.body;
+    const newUser = await registerUser({ firstName, lastName, email, password, role });
     res.status(201).json(newUser);
   } catch (error) {
     console.error(error);
@@ -19,8 +19,8 @@ router.post('/register', async (req, res) => {
 // Login user
 router.post('/login', async (req, res) => {
   try {
-    const { username, password } = req.body;
-    const token = await loginUser(username, password);
+    const { email, password } = req.body;
+    const token = await loginUser(email, password);
     res.json({ token });
   } catch (error) {
     console.error(error);
@@ -28,4 +28,7 @@ router.post('/login', async (req, res) => {
   }
 });
 
+
 export default router;
+
+

@@ -4,8 +4,9 @@ import dotenv from "dotenv";
 import bodyParser from "body-parser";
 import mongoose from "mongoose";
 import cookieParser from "cookie-parser";
-// import authenticateUser from "./middlewares/authMiddleware.js";
+import { authenticateUser } from "./middlewares/authMiddleware.js";
 import authController from "./controllers/authController.js";
+import userManagementController from "./controllers/userManagementController.js";
 
 const app = express();
 
@@ -36,9 +37,9 @@ mongoose.connection.on("disconnected", () => {
   console.log("Mongodb disconnected!");
 });
 
-
 //routes
-app.use('/api/auth', authController);
+app.use("/api/auth", authController);
+app.use("/api/userManagement", authenticateUser, userManagementController);
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
