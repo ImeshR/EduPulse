@@ -7,6 +7,7 @@ import SignUp from './pages/SignUp';
 import SignIn from './pages/SignIn';
 import HeaderPrimary from './components/Header/HeaderPrimary';
 import Footer from './components/Footer/Footer';
+import CoursePage from './components/Home/Courses/CoursePage';
 import { ChakraProvider } from '@chakra-ui/react'
 export default function App() {
   return (
@@ -19,6 +20,7 @@ export default function App() {
         <Route path="/" element={<Home />} />
         <Route path="/sign-up" element={<SignUp />} />
         <Route path="/sign-in" element={<SignIn />} />
+        <Route path="/single-page" element={<CoursePage />} />
       
     </Routes>
     </div>

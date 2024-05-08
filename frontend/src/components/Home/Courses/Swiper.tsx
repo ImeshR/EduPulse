@@ -15,6 +15,15 @@ export default function Swiper() {
       description: "Learn React for building modern web applications.",
       course: "React",
       img: "/react.png",
+      whatYouLearn: [
+        "Build a React application from scratch",
+        "Learn React hooks",
+        "Understand React routing",
+        "Build responsive web applications",
+      ],
+      price: 100,
+      Author: "John Doe",
+
     },
     {
       _id: 2,
@@ -23,62 +32,18 @@ export default function Swiper() {
       description: "Master JavaScript for frontend and backend development.",
       course: "JavaScript",
       img: "/js.png",
+      whatYouLearn: [
+        "Understand JavaScript fundamentals",
+        "Learn ES6 features",
+        "Build a JavaScript project",
+        "Understand JavaScript closures",
+      ],
+      price: 100,
+      Author: "John Doe",
+
+
     },
-    {
-      _id: 3,
-      title: "AWS Course",
-      category: "Cloud Computing",
-      description: "Become proficient in AWS cloud services.",
-      course: "AWS",
-      img: "/aws.png",
-    },
-    {
-      _id: 3,
-      title: "Html",
-      category: "Web Development",
-      description: "Learn HTML for building web pages.",
-      img: "/html.png",
-    },
-    {
-      _id: 4,
-      title: "HTML/CSS/JS Course",
-      category: "Web Development",
-      description: "Learn the basics of web development with HTML, CSS, and JavaScript.",
-      course: "HTML/CSS/JS",
-      img: "/htmlcssjs.png",
-    },
-    {
-      _id: 5,
-      title: "PHP Course",
-      category: "Web Development",
-      description: "Master PHP for server-side web development.",
-      course: "PHP",
-      img: "/php.png",
-    },
-    {
-      _id: 6,
-      title: "Java Course",
-      category: "Software Development",
-      description: "Learn Java programming for building applications.",
-      course: "Java",
-      img: "/java.png",
-    },
-    {
-      _id: 7,
-      title: "C++ Course",
-      category: "Software Development",
-      description: "Master C++ programming for system and application development.",
-      course: "C++",
-      img: "/c++.png",
-    },
-    {
-      _id: 8,
-      title: "Docker Course",
-      category: "DevOps",
-      description: "Learn Docker for containerization and deployment.",
-      course: "Docker",
-      img: "/27.png",
-    },
+    
   ];
 
   const settings = {
