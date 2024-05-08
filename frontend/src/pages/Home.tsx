@@ -3,6 +3,9 @@ import Banner from '../components/Home/Banner'
 import Feature1 from '../components/Home/Featured/Feature1'
 import Feature2 from '../components/Home/Featured/Feature2'
 import Collaborate from '../components/Home/Collaborate'
+import FillerDiv from '../components/Home/FillerDiv'
+import Swiper from '../components/Home/Courses/Swiper'
+import BecomeInstructor from '../components/Home/BecomeInstructor'
 
 
 export default function Home() {
@@ -11,8 +14,12 @@ export default function Home() {
       <Banner />
       <Feature1 />
       <Collaborate/> 
+      
+      <FillerDiv />
+      <Swiper />
+      <BecomeInstructor />
       <Feature2 />
-      <h1>Home</h1>
+      
       
     </div>
   )
