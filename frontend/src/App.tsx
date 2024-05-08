@@ -13,7 +13,7 @@ export default function App() {
     <ChakraProvider>
     <BrowserRouter>
     <HeaderPrimary />
-    <div className='py-10' >
+    <div className='pb-10' >
     <Routes>
       
         <Route path="/" element={<Home />} />
