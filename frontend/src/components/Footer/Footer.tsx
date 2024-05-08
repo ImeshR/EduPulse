@@ -385,10 +385,10 @@ const Footer = () => {
         <Box>
           {" "}
           <Text fontSize="13.5px">
-            © 2023 Coursera Inc. All rights reserved.
+            © 2023 EduPulse Inc. All rights reserved.
           </Text>
         </Box>
-        <Flex spacing={4} overflow='hidden'>
+        <Flex overflow='hidden'>
           <Image
             src="https://d3njjcbhbojbot.cloudfront.net/api/utilities/v1/imageproxy/https://s3.amazonaws.com/coursera_assets/footer/facebook.png?auto=format%2Ccompress&dpr=1&w=28&h=28&q=40"
             alt=""
