@@ -4,6 +4,8 @@ import dotenv from "dotenv";
 import bodyParser from "body-parser";
 import mongoose from "mongoose";
 import cookieParser from "cookie-parser";
+import { authenticateUser } from "../user-managment/middlewares/authMiddleware.js";
+import courseManagementController from "./controllers/courseManagementController.js";
 
 const app = express();
 
@@ -35,6 +37,7 @@ mongoose.connection.on("disconnected", () => {
 });
 
 //routes
+app.use("/api/courseManagement", authenticateUser, courseManagementController);
 
 
 app.listen(PORT, () => {
