@@ -6,6 +6,7 @@ import Collaborate from '../components/Home/Collaborate'
 import FillerDiv from '../components/Home/FillerDiv'
 import Swiper from '../components/Home/Courses/Swiper'
 import BecomeInstructor from '../components/Home/BecomeInstructor'
+import EduPulseForBusiness from '../components/Home/EduPulseForBusiness'
 
 
 export default function Home() {
@@ -18,6 +19,7 @@ export default function Home() {
       <FillerDiv />
       <Swiper />
       <BecomeInstructor />
+      <EduPulseForBusiness />
       <Feature2 />
       
       

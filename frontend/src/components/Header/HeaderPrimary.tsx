@@ -1,6 +1,7 @@
 import React from "react";
 import { RiShoppingCartLine, RiSearchLine } from "react-icons/ri";
 import HeaderPopup from "./HeaderPopup";
+import { Link } from "react-router-dom";
 
 function HeaderPrimary() {
   return (
@@ -9,9 +10,11 @@ function HeaderPrimary() {
     <div className="headerPrimary bg-white shadow-md flex justify-between items-center h-16 px-4 sm:px-6 lg:px-8 text-base">
      <div className=" flex flex-row space-x-20">
       <div className="left flex items-center">
+        <Link to='/'>
         <div className="udemyLogo">
           <img src="/logo.png" className="logo h-10 w-auto" alt="logo"></img>
         </div>
+        </Link>
         <div className="ml-8">
           <span className="categories">Categories</span>
         </div>
@@ -28,20 +31,24 @@ function HeaderPrimary() {
       </div>
       <div className="right flex  items-center">
         <div className="w-20 mx-10">
-          <span className="business">Udemy for Business</span>
+          <span className="business">Your Dashboard</span>
         </div>
         <div className="w-20">
-          <span className="teach">Teach on Udemy</span>
+          <span className="teach">Teach on EduPulse</span>
         </div>
         <div className="cartDiv ml-4">
           <RiShoppingCartLine className="icon" />
         </div>
+        <Link to="/sign-in">
         <div className="login button bg-white text-[#597cbd] border border-[#597cbd] hover:text-[#597cbd] hover:border-[#456299] rounded-md px-4 py-1 ml-4 cursor-pointer">
           Log In
         </div>
+        </Link>
+        <Link to="/sign-up">
         <div className="signup button bg-[#6b92da] text-white border border-[#597cbd] hover:bg-[#597cbd] hover:border-[#456299] rounded-md px-4 py-1 ml-2 cursor-pointer">
           Sign up
         </div>
+        </Link>
       </div>
     </div>
     </div>

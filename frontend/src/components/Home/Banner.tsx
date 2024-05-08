@@ -7,7 +7,7 @@ function Banner() {
       <div className="offerDiv ml-8 absolute bg-white w-96 h-60 top-20 left-1/6 rounded-md shadow-md p-4 text-left">
         <h2 className="text-4xl mb-2">Learn on your schedule</h2>
         <p className="text-lg">
-          Study any topic, anytime. Explore thousands of courses starting at ₹455 each.
+          Study any topic, anytime. Explore thousands of courses starting at RS.1000 each.
         </p>
         <div className="searchBarDiv mt-4 relative">
           <input
