@@ -7,7 +7,7 @@ function HeaderPrimary() {
   return (
     <div>
         <HeaderPopup/>
-    <div className="headerPrimary bg-[#eaf3ff] shadow-md flex justify-between items-center h-16 px-4 sm:px-6 lg:px-8 text-base">
+    <div className="headerPrimary bg-[#ffffff] flex justify-between items-center h-20 shadow-lg px-4 sm:px-6 lg:px-8 text-base">
      <div className=" flex flex-row space-x-20">
       <div className="left flex items-center">
         <Link to='/'>
@@ -27,7 +27,7 @@ function HeaderPrimary() {
         ></input>
       </div>
       </div>
-      <div className="right flex  items-center">
+      <div className="right flex font-sans items-center">
         <div className="w-20 mx-10">
           <span className="business">Your Dashboard</span>
         </div>

@@ -3,6 +3,7 @@ import React from "react";
 import { Box, Image, Text } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 
+
 const CourseAbsolute = ({ props }) => {
   const { onOpen, price, img } = props;
 
@@ -28,7 +29,7 @@ const CourseAbsolute = ({ props }) => {
           <h3 className="font-serif font-bold max-w-[250px] py-1 ">
             Subscribe to Edu Pulsde's top courses
           </h3>
-          <p className="text-[10px]">
+          <p className="text-[12px]">
             Get this course, plus 8,000+ of our top-rated courses with Personal
             Plan{" "}
             <a href="http://" className="underline text-blue-800 font-bold">
@@ -49,9 +50,9 @@ const CourseAbsolute = ({ props }) => {
           </div>
         </div>
 
-        <div className="flex space-x-2 place-items-baseline">
-          <p className="font-bold text-sm">RS.{price}</p>
-          <p className="line-through text-xs ">RS.</p>
+        <div className="flex space-x-2 text-lg place-items-baseline">
+          <p className="font-bold ">RS.{price}</p>
+          <p className="line-through  ">RS.</p>
           <p className="text-xs">0 off</p>
         </div>
         <div className="flex text-red-600 items-baseline space-x-1 my-2">
@@ -61,15 +62,17 @@ const CourseAbsolute = ({ props }) => {
         <Box>
             <Text>{}</Text>
         </Box>
-        <button
+        <div className="border-2 w-full text-center py-[7px] bg-blue-400 hover:bg-blue-500 text-white text-sm font-bold">
+        <Link to ='/payment'
           onClick={handlePayment}
-          className=" border-2 w-full py-[7px] bg-blue-400 hover:bg-blue-500 text-white text-sm font-bold"
+          className=" "
         >
           Buy this course
-        </button>
+        </Link>
+        </div>
 
         <div className="items-center text-[10px] space-y-1 w-full justify-center flex flex-col py-2">
-          <p>30-Day Money-Back Guarantee</p>
+          
           <p>Full Lifetime Access</p>
         </div>
 
