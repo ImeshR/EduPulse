@@ -14,13 +14,14 @@ export default function App() {
     <ChakraProvider>
     <BrowserRouter>
     <HeaderPrimary />
-    <div className='pb-10' >
+    <div className='pb-10 bg-blue-50' >
     <Routes>
       
         <Route path="/" element={<Home />} />
         <Route path="/sign-up" element={<SignUp />} />
         <Route path="/sign-in" element={<SignIn />} />
-        <Route path="/single-page" element={<CoursePage />} />
+        
+        <Route path="/course/:id" element={<CoursePage />} />
       
     </Routes>
     </div>

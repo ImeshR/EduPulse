@@ -7,17 +7,15 @@ function HeaderPrimary() {
   return (
     <div>
         <HeaderPopup/>
-    <div className="headerPrimary bg-white shadow-md flex justify-between items-center h-16 px-4 sm:px-6 lg:px-8 text-base">
+    <div className="headerPrimary bg-[#eaf3ff] shadow-md flex justify-between items-center h-16 px-4 sm:px-6 lg:px-8 text-base">
      <div className=" flex flex-row space-x-20">
       <div className="left flex items-center">
         <Link to='/'>
         <div className="udemyLogo">
-          <img src="/logo.png" className="logo h-10 w-auto" alt="logo"></img>
+          <img src="/logo.png" className="logo h-8 w-auto" alt="logo"></img>
         </div>
         </Link>
-        <div className="ml-8">
-          <span className="categories">Categories</span>
-        </div>
+        
       </div>
       <div className="mid  flex-1 ml-4 sm:ml-6 lg:ml-8 relative">
         <div className="searchIcon  absolute left-0 flex justify-center items-center h-8 w-10">
@@ -40,12 +38,12 @@ function HeaderPrimary() {
           <RiShoppingCartLine className="icon" />
         </div>
         <Link to="/sign-in">
-        <div className="login button bg-white text-[#597cbd] border border-[#597cbd] hover:text-[#597cbd] hover:border-[#456299] rounded-md px-4 py-1 ml-4 cursor-pointer">
+        <div className="login button bg-white text-slate-700  shadow-lg border  hover:text-slate-900 rounded-md px-4 py-1 ml-4 cursor-pointer">
           Log In
         </div>
         </Link>
         <Link to="/sign-up">
-        <div className="signup button bg-[#6b92da] text-white border border-[#597cbd] hover:bg-[#597cbd] hover:border-[#456299] rounded-md px-4 py-1 ml-2 cursor-pointer">
+        <div className="signup button bg-blue-400 text-white border shadow-lg hover:bg-blue-500 rounded-md px-4 py-1 ml-2 cursor-pointer">
           Sign up
         </div>
         </Link>

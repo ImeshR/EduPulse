@@ -3,8 +3,9 @@ import { Box, Grid, Heading, Link, Flex, Image, Text } from "@chakra-ui/react";
 
 const Footer = () => {
   return (
+    <div className="bg-[#c5ddff]">
     <Flex
-      bg="#f5f5f5"
+      
       p={5}
       paddingBottom={{
         sm: "60px",
@@ -135,177 +136,11 @@ const Footer = () => {
           <Link fontSize="13.5px">Meta Front-End Developer</Link>
         </Box>
 
-        <Box
-          pl={{
-            lg: "25px",
-            md: "15px",
-            sm: "10px",
-          }}
-          pr={{
-            lg: "35px",
-            md: "15px",
-            sm: "10px",
-          }}
-        >
-          <Heading as="h6" size="md" fontWeight="bold">
-            Featured Articles
-          </Heading>
-          <br />
-          <Link fontSize="13.5px">
-            A Comprehensive Guide to Becoming a Data Analyst
-          </Link>
-          <br />
-          <Link fontSize="13.5px">
-            Advance Your Career With A Cybersecurity Certification
-          </Link>
-          <br />
-          <Link fontSize="13.5px">Get Your Data Analytics Certification</Link>
-          <br />
-          <Link fontSize="13.5px">
-            How to Break into the Field of Data Analysis
-          </Link>
-          <br />
-          <Link fontSize="13.5px">
-            Jumpstart Your Data Career with a SQL Certification
-          </Link>
-          <br />
-          <Link fontSize="13.5px">Learn How to Become PMP Certified</Link>
-          <br />
-          <Link fontSize="13.5px">
-            Start Your Career with CAPM Certification
-          </Link>
-          <br />
-          <Link fontSize="13.5px">
-            Understanding the Role and Responsibilities of a Scrum Master
-          </Link>
-          <br />
-          <Link fontSize="13.5px">
-            Unlock Your Potential with a PMI Certification
-          </Link>
-          <br />
-          <Link fontSize="13.5px">
-            What You Should Know About CompTIA A+ Certification
-          </Link>
-        </Box>
+      
 
-        <Box
-          pl={{
-            lg: "25px",
-            md: "15px",
-            sm: "10px",
-          }}
-          pr={{
-            lg: "35px",
-            md: "15px",
-            sm: "10px",
-          }}
-        >
-          <Heading as="h6" size="md" fontWeight="bold">
-            Coursera
-          </Heading>
-          <br />
-          <Link fontSize="13.5px">About</Link>
-          <br />
-          <Link fontSize="13.5px">What We Offer</Link>
-          <br />
-          <Link fontSize="13.5px">Leadership</Link>
-          <br />
-          <Link fontSize="13.5px">Careers</Link>
-          <br />
-          <Link fontSize="13.5px">Catalog</Link>
-          <br />
-          <Link fontSize="13.5px">Coursera Plus</Link>
-          <br />
-          <Link fontSize="13.5px">Professional Certificates</Link>
-          <br />
-          <Link fontSize="13.5px">MasterTrack® Certificates</Link>
-          <br />
-          <Link fontSize="13.5px">Degrees</Link>
-          <br />
-          <Link fontSize="13.5px">For Enterprise</Link>
-          <br />
-          <Link fontSize="13.5px">For Government</Link>
-          <br />
-          <Link fontSize="13.5px">For Campus</Link>
-          <br />
-          <Link fontSize="13.5px">Become a Partner</Link>
-          <br />
-          <Link fontSize="13.5px">Coronavirus Response</Link>
-          <br />
-          <Link fontSize="13.5px">Free Courses</Link>
-          <br />
-          <Link fontSize="13.5px">All Courses</Link>
-        </Box>
+  
+ 
 
-        <Box
-          pl={{
-            lg: "25px",
-            md: "15px",
-            sm: "10px",
-          }}
-          pr={{
-            lg: "35px",
-            md: "15px",
-            sm: "10px",
-          }}
-        >
-          <Heading as="h6" size="md" fontWeight="bold">
-            Community
-          </Heading>
-          <br />
-          <Link fontSize="13.5px">Learners</Link>
-          <br />
-          <Link fontSize="13.5px">Partners</Link>
-          <br />
-          <Link fontSize="13.5px">Beta Testers</Link>
-          <br />
-          <Link fontSize="13.5px">Translators</Link>
-          <br />
-          <Link fontSize="13.5px">Blog</Link>
-          <br />
-          <Link fontSize="13.5px">Tech Blog</Link>
-          <br />
-          <Link fontSize="13.5px">Teaching Center</Link>
-        </Box>
-
-        <Box
-          pl={{
-            lg: "25px",
-            md: "15px",
-            sm: "10px",
-          }}
-          pr={{
-            lg: "35px",
-            md: "15px",
-            sm: "10px",
-          }}
-        >
-          <Heading as="h6" size="md" fontWeight="bold">
-            More
-          </Heading>
-          <br />
-          <Link fontSize="13.5px">Press</Link>
-          <br />
-          <Link fontSize="13.5px">Investors</Link>
-          <br />
-          <Link fontSize="13.5px">Terms</Link>
-          <br />
-          <Link fontSize="13.5px">Privacy</Link>
-          <br />
-          <Link fontSize="13.5px">Help</Link>
-          <br />
-          <Link fontSize="13.5px">Accessibility</Link>
-          <br />
-          <Link fontSize="13.5px">Contact</Link>
-          <br />
-          <Link fontSize="13.5px">Articles</Link>
-          <br />
-          <Link fontSize="13.5px">Directory</Link>
-          <br />
-          <Link fontSize="13.5px">Affiliates</Link>
-          <br />
-          <Link fontSize="13.5px">Modern Slavery Statement</Link>
-        </Box>
 
         <Box
           pl={{
@@ -364,7 +199,7 @@ const Footer = () => {
         </Box>
       </Grid>
       <Flex
-        mt={15}
+        mt={10}
         gap={7}
         borderTop="1px solid #c9c9c9"
         direction={{
@@ -379,7 +214,7 @@ const Footer = () => {
         padding={{
           sm: "10px",
           md: "35px",
-          lg: "55px",
+          lg: "16px",
         }}
       >
         <Box>
@@ -431,6 +266,7 @@ const Footer = () => {
         </Flex>
       </Flex>
     </Flex>
+  </div>
   );
 };
 

@@ -10,14 +10,16 @@ const CoursePage = () => {
     _id: id,
     title: "React Course",
     category: "Web Development",
-    description: "Learn React for building modern web applications.",
+    description: "Learn React for building modern web applications Learn React for building modern web applications Learn React for building modern web applications Learn React for building modern web applications Learn React for building modern web applications.",
     course: "React",
     img: "/react.png",
     whatYouLearn: [
-      "Build a React application from scratch",
-      "Learn React hooks",
-      "Understand React routing",
-      "Build responsive web applications",
+      "Build enterprise level Node applications and deploy to the cloud (AWS)",
+      "Work with real life data and SpaceX API to build a NASA launch system, discover new planets that may contain life + other projects",
+      "Become the top 10% Node Developer. Learn REALLY advanced topics!",
+      "Learn to build secure and performant, large scale applications like a senior backend developer",
+      "Authentication, File I/O, Databases (SQL, MongoDB), Express Framework, Sockets, plus many other important topics a backend developer should know",
+      "Focus on security best practices throughout the course so you can be confident with your deployments"
     ],
     price: 100,
     author: "John Doe",
@@ -31,17 +33,17 @@ const CoursePage = () => {
   };
 
   const props = {
-    onOpen: () => {}, // Placeholder function
+    onOpen: () => { }, // Placeholder function
     price: courseData.price,
     img: courseData.img,
   };
 
   return (
-    <div>
+    <div  className="bg-blue-50">
       <div className="w-full flex justify-center items-center flex-col">
         <div className="w-full bg-neutral-800 flex justify-center p-5">
           <div
-            style={{ paddingTop: "100px" }}
+            style={{ paddingTop: "10px" }}
             className="xl:max-h-[320px] px-2  max-w-[598px] xl:max-w-[900px]"
           >
             <div className="xl:flex xl:space-x-4">
@@ -67,21 +69,21 @@ const CoursePage = () => {
                       <Box className="text-yellow-300 text-xs">{courseData.rating}</Box>
                       <Box className="text-[11px]">⭐⭐⭐⭐</Box>
                       <Box className="flex text-[12px] space-x-2">
-                        <Box color="#a435f0">({courseData.ratingsCount} ratings)</Box>
+                        <Box className="text-blue-500">({courseData.ratingsCount} ratings)</Box>
                         <Box>{courseData.studentsCount} students</Box>
                       </Box>
                     </Box>
 
                     <Box className="createdby space-x-2" display="flex">
-                      <Box className="text-[12px]">
+                      <Box className="text-[12px] ">
                         <p>Created by</p>
                       </Box>
-                      <Box color="#a435f0" className="text-[12px] underline ">
+                      <Box className="text-[12px] underline text-blue-500">
                         {courseData.author}
                       </Box>
                     </Box>
 
-                    <Box className="text-[12px] space-x-4" display="flex">
+                    <Box className="text-[12px]  space-x-4" display="flex">
                       <Box>🌗 Last updated {courseData.lastUpdated}</Box>
                       <Box>🌐 {courseData.language}</Box>
                       <Box display="flex">
@@ -98,19 +100,61 @@ const CoursePage = () => {
             </div>
           </div>
         </div>
-        <div className="max-w-[598px] h-[500px] xl:mr-72"></div>
-        <Box mt="1rem" bg="#D7DBDD" w="95%" p="5">
-          <Heading size="xl">{courseData.title}</Heading>
-          <Box mt="1rem">
-            <Heading size="md">Teacher: {courseData.author}</Heading>
-          </Box>
-          <Box mt="1rem">
-            <Heading size="md">Course Created: {courseData.lastUpdated}</Heading>
-          </Box>
-          <Box mt="1rem">
-            <Heading size="md">Total Videos: 10</Heading>
-          </Box>
-        </Box>
+
+      
+       
+
+
+        {/* What you learn component*/}
+
+        <div className="xl:mr-24 mt-10">
+          <div className="max-w-[598px] xl:mr-96">
+            <div className="border my-5 py-5 max-w-[598px] p-4 shadow-md border-slate-100 text-black bg-white">
+              
+            
+              
+              
+              <div className="py-2">
+                <h3 className="text-lg font-bold pb-4">What you'll learn</h3>
+              </div>
+              <div className="grid font-semibold text-slate-700 grid-cols-1 sm:grid-cols-2 gap-y-1.5">
+                {courseData.whatYouLearn.map((item, index) => (
+                  <div key={index} className="flex items-center space-x-4">
+                    <div className="flex items-center space-x-2">
+                      <div className="text-[12px]">📚</div>
+                      <div className="text-[12px]">{item}</div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              <div className="py-2 items-start">
+              <h3 className="text-lg font-bold pb-2 mt-4">Course Details</h3>
+            </div>
+          <div className="flex flex-col  space-y-2">
+              <div className="flex items-center space-x-1">
+                <div className="text-[12px] font-semibold">👨‍💻 Author:</div>
+                <div className="text-[12px]">{courseData.author}</div>
+              </div>
+              <div className="flex items-center space-x-1">
+                <div className="text-[12px] font-semibold">🖊️ Title:</div>
+                <div className="text-[12px]">{courseData.title}</div>
+              </div>
+              <div className="flex items-center space-x-1">
+                <div className="text-[12px] font-semibold">🕔 Last updated:</div>
+                <div className="text-[12px]">{courseData.lastUpdated}</div>
+             </div>
+            </div>
+
+            </div>
+          </div>
+        </div>
+
+        
+
+
+
+      
 
         <Box mt="40px"></Box>
 

@@ -1,3 +1,4 @@
+
 import React from "react";
 import { Box, Image, Text } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
@@ -10,7 +11,7 @@ const CourseAbsolute = ({ props }) => {
   }
 
   return (
-    <div className="xl:border text-white  xl:text-black xl:border-white xl:max-w-[280px] xl:shadow-md shadow-neutral-800  xl:bg-white">
+    <div className="xl:border text-white bg-[#ffffff] xl:text-black xl:border-white xl:max-w-[380px] xl:shadow-2xl shadow-neutral-800  ">
       <div>
         <div>
           <Image src={img} />
@@ -19,26 +20,24 @@ const CourseAbsolute = ({ props }) => {
           <div className={`cursor-pointer text-center w-full border-b-[1px]`}>
             Personal
           </div>
-          <div className={`cursor-pointer w-full text-center border-b-[1px] items-center`}>
-            Teams
-          </div>
+          
         </div>
       </div>
       <div className="px-[24px]">
         <div>
           <h3 className="font-serif font-bold max-w-[250px] py-1 ">
-            Subscribe to Arivu's top courses
+            Subscribe to Edu Pulsde's top courses
           </h3>
           <p className="text-[10px]">
             Get this course, plus 8,000+ of our top-rated courses with Personal
             Plan{" "}
-            <a href="http://" className="underline text-fuchsia-800 font-bold">
+            <a href="http://" className="underline text-blue-800 font-bold">
               Learn more
             </a>
           </p>
-          <button className="bg-fuchsia-700  w-full py-[7px] font-semibold my-2" onClick={handlePayment}>
-            Start subscription
-          </button>
+          <div className="bg-blue-50 text-center  w-full py-[4px] font-semibold my-2" onClick={handlePayment}>
+            Start Learn
+          </div>
           <div className="w-full justify-center items-center flex flex-col space-y-[8px]">
             <p className="text-[9px]">Starting at ₹750 per month</p>
             <p className="text-[9px]"> Cancel anytime</p>
@@ -51,7 +50,7 @@ const CourseAbsolute = ({ props }) => {
         </div>
 
         <div className="flex space-x-2 place-items-baseline">
-          <p className="font-bold text-sm">₹{price}</p>
+          <p className="font-bold text-sm">RS.{price}</p>
           <p className="line-through text-xs ">RS.</p>
           <p className="text-xs">0 off</p>
         </div>
@@ -64,7 +63,7 @@ const CourseAbsolute = ({ props }) => {
         </Box>
         <button
           onClick={handlePayment}
-          className=" border-2 w-full py-[7px] text-sm font-bold"
+          className=" border-2 w-full py-[7px] bg-blue-400 hover:bg-blue-500 text-white text-sm font-bold"
         >
           Buy this course
         </button>

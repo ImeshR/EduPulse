@@ -5,7 +5,7 @@ function HeaderPopup() {
   const [hidePopup, setHidePopup] = useState(false);
 
   return (
-    <div className={`headerPopup bg-blue-300 text-blue-900 ${hidePopup ? "hidden" : "block"} flex justify-center items-center h-14 px-4 sm:px-6 lg:px-8`}>
+    <div className={`headerPopup bg-[#c5ddff] text-blue-900 ${hidePopup ? "hidden" : "block"} flex justify-center items-center h-14 px-4 sm:px-6 lg:px-8`}>
       <div className="dialogueBox">
         <span className="title font-bold text-lg">Start Solving your challenge now </span>
         <span className="offer">| Enroll today and learn risk-free with our 30-day money-back guarantee.</span>
