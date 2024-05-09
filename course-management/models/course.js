@@ -1,4 +1,8 @@
 import mongoose from "mongoose";
+import User from "../../user-managment/models/Users.js";
+
+// Register the User model with Mongoose
+const UserModel = mongoose.model('User', User.schema);
 
 const { Schema } = mongoose;
 
@@ -28,7 +32,7 @@ const courseSchema = new Schema({
   },
   createdBy: {
     type: Schema.Types.ObjectId,
-    ref: "User",
+    ref: UserModel,
     required: true,
   },
   price: {
