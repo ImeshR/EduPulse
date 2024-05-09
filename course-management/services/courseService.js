@@ -102,4 +102,19 @@ const getCourseById = async (id) => {
   }
 };
 
-export { createCourse, updateCourse, getAllCourses, getCourseById };
+//delete course by id
+const deleteCourse = async (id) => {
+  try {
+    const course = await Course.findByIdAndDelete(id);
+    return {
+      message: "Course deleted successfully",
+    };
+  } catch (error) {
+    return {
+      message: "Failed to delete course",
+      error: error.message,
+    };
+  }
+};
+
+export { createCourse, updateCourse, getAllCourses, getCourseById , deleteCourse};
