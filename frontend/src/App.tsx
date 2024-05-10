@@ -11,6 +11,7 @@ import Payment from './pages/Payment';
 import { ChakraProvider } from '@chakra-ui/react';
 import AdminDashboard from './pages/Admin/AdminDashboard';
 
+
 function App() {
   return (
     <ChakraProvider>
@@ -24,6 +25,7 @@ function App() {
             <Route path="/course/:id" element={<CoursePage />} />
             <Route path="/payment" element={<Payment />} />
             <Route path="/admin/*" element={<AdminDashboard />} />
+            
           </Routes>
           <Footer />
         </div>

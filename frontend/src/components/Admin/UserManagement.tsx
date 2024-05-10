@@ -1,9 +1,10 @@
 import React from 'react';
 import { FaPlusCircle, FaEye } from 'react-icons/fa';
 import userManagement from '/22.png'
+import AdminBg from '/30.png';
 const UserManagement = () => {
   return (
-    <div className="container font-mono mx-auto mt-2">
+    <div className="container font-mono mx-auto mt-2"style={{ backgroundImage: `linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.9)), url(${AdminBg})`, backgroundSize: '100% 100%', backgroundPosition: 'center' }}>
       <div className="text-center  z-50">
         <h1 className="text-4xl font-bold text-blue-500 underline">User Management</h1>
         

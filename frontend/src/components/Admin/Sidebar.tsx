@@ -5,7 +5,7 @@ const Sidebar = () => {
   const { pathname } = useLocation();
 
   return (
-    <div className="bg-gray-50 text-white w-64 flex flex-col border-r-4 shadow-xl border-t-4 h-full">
+    <div className="bg-gray-50 min-h-screen text-white w-64 flex flex-col border-r-4 shadow-xl border-t-4 ">
       <div className="p-4 text-xl text-center text-gray-700 font-bold">Admin Panel</div>
       <div className="border-t text-gray-700 font-mono border-gray-200">
         <Link
