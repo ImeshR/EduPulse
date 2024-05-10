@@ -4,6 +4,8 @@ import dotenv from "dotenv";
 import bodyParser from "body-parser";
 import mongoose from "mongoose";
 import cookieParser from "cookie-parser";
+import { authenticateUser } from "../user-managment/middlewares/authMiddleware.js";
+import paymentManagementController from "./controllers/paymentControler.js";
 
 
 const app = express();
@@ -36,6 +38,7 @@ mongoose.connection.on("disconnected", () => {
 });
 
 //routes
+app.use('/api/paymentMangement', authenticateUser,paymentManagementController);
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
