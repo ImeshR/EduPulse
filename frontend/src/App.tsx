@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-
+import { ChakraProvider } from '@chakra-ui/react';
 import Home from './pages/Home';
 import SignUp from './pages/SignUp';
 import SignIn from './pages/SignIn';
@@ -8,7 +8,8 @@ import HeaderPrimary from './components/Header/HeaderPrimary';
 import Footer from './components/Footer/Footer';
 import CoursePage from './components/Home/Courses/CoursePage';
 import Payment from './pages/Payment';
-import { ChakraProvider } from '@chakra-ui/react';
+import MyCourse from './pages/MyCourse';
+
 import AdminDashboard from './pages/Admin/AdminDashboard';
 
 
@@ -24,6 +25,7 @@ function App() {
             <Route path="/sign-in" element={<SignIn />} />
             <Route path="/course/:id" element={<CoursePage />} />
             <Route path="/payment" element={<Payment />} />
+            <Route path="/my-course" element={<MyCourse />} />
             <Route path="/admin/*" element={<AdminDashboard />} />
             
           </Routes>
