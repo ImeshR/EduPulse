@@ -20,6 +20,11 @@ const savePaymentTransaction = async (transaction) => {
 const getAllPaymentTransactions = async () => {
   try {
     const paymentTransactions = await PaymentTransaction.find();
+
+    //convert amount to cents
+    paymentTransactions.forEach((transaction) => {
+      transaction.amount = transaction.amount / 100;
+    });
     return paymentTransactions;
   } catch (error) {
     return {
@@ -33,6 +38,11 @@ const findPaymentTransactionById = async (id) => {
   const userId = id;
   try {
     const paymentTransaction = await PaymentTransaction.find({ userId });
+
+    //convert amount to cents
+    paymentTransaction.forEach((transaction) => {
+      transaction.amount = transaction.amount / 100;
+    });
     return paymentTransaction;
   } catch (error) {
     return {
