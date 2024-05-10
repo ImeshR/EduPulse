@@ -191,6 +191,8 @@ const createPaymentIntent = async (userId, amount, courseId) => {
   const customerId = card.customerId;
   const cardSourceId = card.SourceId;
 
+  amount = amount * 100;
+
   const currency = "usd";
   const description = `Payment for course ${courseId}`;
 
