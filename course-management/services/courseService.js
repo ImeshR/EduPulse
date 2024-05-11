@@ -1,4 +1,8 @@
 import Course from "../models/course.js";
+import UserEnrollment from "../models/userEnrollment.js";
+import { createPaymentIntent } from "../../payment-management/services/stripeService.js";
+import { sendEmail } from "./emailService.js";
+import { get } from "http";
 
 //create a course
 const createCourse = async (
@@ -117,4 +121,80 @@ const deleteCourse = async (id) => {
   }
 };
 
-export { createCourse, updateCourse, getAllCourses, getCourseById , deleteCourse};
+//enroll a user to a course
+const enrollUserToCourse = async (courseId, userId , transactionId) => {
+
+  //find course by id
+  const course = await getCourseById(courseId);
+  if (!course) {
+    return {
+      message: "Course not found",
+    };
+  }
+
+  // //find user enrollment
+  const userEnrollment = await UserEnrollment.findOne({
+    courseId,
+    userId,
+  });
+
+
+  if (!userEnrollment) {
+    const userEnrollment = new UserEnrollment({
+      userId,
+      courseId,
+      paymentId: transactionId,
+    });
+
+    //send email
+    await sendEmail(
+      "imesh6687@gmail.com",
+      "Course Enrollment",
+      `You have successfully enrolled to the course ${course.name}`,
+      `<p>
+      You have successfully enrolled to the course ${course.name}. 
+      Your payment of $${course.price} has been successfully processed.
+    </p>`
+    );
+
+    await userEnrollment.save();
+    return {
+      message: "User enrolled to the course successfully",
+      data: userEnrollment,
+    };
+  }
+
+  if (userEnrollment) {
+    return {
+      message: "User already enrolled to the course",
+    };
+  }
+};
+
+const cancelEnrollment = async (courseId, userId) => {
+  try {
+    const userEnrollment = await UserEnrollment.findOneAndDelete({
+      courseId,
+      userId,
+    });
+    return {
+      message: "User enrollment canceled successfully",
+      data: userEnrollment,
+    };
+  } catch (error) {
+    return {
+      message: "Failed to cancel user enrollment",
+      error: error.message,
+    };
+  }
+}
+
+export {
+  createCourse,
+  updateCourse,
+  getAllCourses,
+  getCourseById,
+  deleteCourse,
+  enrollUserToCourse,
+  cancelEnrollment,
+};
