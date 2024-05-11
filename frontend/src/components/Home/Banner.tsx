@@ -1,5 +1,6 @@
 import React from "react";
 import { FaSearch } from "react-icons/fa";
+import cover from "/cover2.jpg";
 
 function Banner() {
   return (
@@ -21,11 +22,8 @@ function Banner() {
           </div>
         </div>
       </div>
-      <img
-        className="adImage"
-        src="https://img-b.udemycdn.com/notices/featured_banner/image_udlite/14490e9f-45d2-4095-8c5f-5fc05fe8dc84.jpg"
-        alt="AdImage"
-      />
+      <img src={cover} alt="cover" className="w-full h-96 object-cover" />
+     
     </div>
   );
 }
