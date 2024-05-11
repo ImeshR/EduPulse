@@ -1,4 +1,8 @@
 import Course from "../models/course.js";
+import UserEnrollment from "../models/userEnrollment.js";
+import { createPaymentIntent } from "../../payment-management/services/stripeService.js";
+import { sendEmail } from "./emailService.js";
+import { get } from "http";
 
 //create a course
 const createCourse = async (
@@ -117,4 +121,75 @@ const deleteCourse = async (id) => {
   }
 };
 
-export { createCourse, updateCourse, getAllCourses, getCourseById , deleteCourse};
+//enroll a user to a course
+const enrollUserToCourse = async (courseId, userId) => {
+  //find course by id
+  const course = await getCourseById(courseId);
+  if (!course) {
+    return {
+      message: "Course not found",
+    };
+  }
+
+  //find user enrollment
+  const userEnrollment = await UserEnrollment.findOne({
+    courseId,
+    userId,
+  });
+
+  if(userEnrollment){
+    return {
+      message: "User already enrolled to the course",
+    };
+  }
+
+  // //create payment intent
+  const response = await createPaymentIntent(userId, course.price, courseId);
+
+  // if (response.error) {
+  //   return {
+  //     message: "Failed to enroll user to the course",
+  //     error: response.error,
+  //   };
+  // }
+
+  // if (!userEnrollment) {
+  //   const userEnrollment = new UserEnrollment({
+  //     userId,
+  //     courseId,
+  //     paymentIntentId: response.data.id,
+  //   });
+
+  //   //send email
+  //   await sendEmail(
+  //     "imesh6687@gmail.com",
+  //     "Course Enrollment",
+  //     `You have successfully enrolled to the course ${course.name}`,
+  //     `<p>
+  //     You have successfully enrolled to the course ${course.name}. 
+  //     Your payment of $${course.price} has been successfully processed.
+  //   </p>`
+  //   );
+
+  //   await userEnrollment.save();
+  //   return {
+  //     message: "User enrolled to the course successfully",
+  //     data: userEnrollment,
+  //   };
+  // }
+
+  // if (userEnrollment) {
+  //   return {
+  //     message: "User already enrolled to the course",
+  //   };
+  // }
+};
+
+export {
+  createCourse,
+  updateCourse,
+  getAllCourses,
+  getCourseById,
+  deleteCourse,
+  enrollUserToCourse,
+};

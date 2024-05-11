@@ -1,6 +1,8 @@
 import Stripe from "stripe";
 import Card from "../models/cardDetailsModal.js";
 import PaymentTransaction from "../models/paymentTransaction.js";
+import Users from "../../user-managment/models/Users.js";
+import { sendEmail } from "./emailService.js";
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
   apiVersion: "2020-08-27",
@@ -218,6 +220,18 @@ const createPaymentIntent = async (userId, amount, courseId) => {
     // Save the payment transaction in the database
     await savePaymentTransaction(transaction);
 
+    //send email to user
+    await sendEmail(
+      "imesh6687@gmail.com",
+      "Payment Confirmation",
+      `Your payment of $${
+        amount / 100
+      } for course ${courseId} has been successfully processed`,
+      `<p>Your payment of $${
+        amount / 100
+      } for course ${courseId} has been successfully processed</p>`
+    );
+
     return {
       message: "Payment intent created successfully",
       data: paymentIntent,
@@ -257,6 +271,16 @@ const cancelPaymentTransaction = async (userId, transactionId) => {
       { userId, transactionId },
       { $set: { status: "refunded", refundId: refund.id } },
       { new: true } // Return the updated document
+    );
+
+    //send email to user
+    await sendEmail(
+      "imesh6687@gmail.com",
+      "Payment Refund",
+      `Your payment of $${paymentTransaction.amount / 100} has been refunded`,
+      `<p>Your payment of $${
+        paymentTransaction.amount / 100
+      } has been refunded</p>`
     );
 
     return {
