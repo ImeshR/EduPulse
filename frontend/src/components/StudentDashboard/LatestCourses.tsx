@@ -42,7 +42,7 @@ const LatestCourses = () => {
 
   return (
     <div className="mt-10 min-h-screen">
-      <h1 className="text-4xl text-blue-500 font-extrabold text-center">Latest Courses</h1>
+      <h1 className="text-4xl  text-gray-700 font-extrabold px-20">Recomand For you</h1>
       <Flex justifyContent="center" mt={4}>
         {latestCourses.slice(0, 4).map(course => (
           <Box key={course._id} width="250px" height="450px" m={2}>

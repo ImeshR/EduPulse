@@ -4,6 +4,7 @@ import MyCourses from '../../components/StudentDashboard/MyCourses'
 import LatestCourses from '../../components/StudentDashboard/LatestCourses'
 import { Box, Text } from "@chakra-ui/react";
 import LernerOutcomes from '../../components/StudentDashboard/LernerOutcomes';
+import CompletedCourses from '../../components/StudentDashboard/CompletedCourses';
 
 export default function StudentDashboard() {
   return (
@@ -12,6 +13,7 @@ export default function StudentDashboard() {
 
         <Slider />
         <MyCourses />
+        <CompletedCourses />
         <LatestCourses />
         <Box
           border="4px solid"

@@ -143,7 +143,7 @@ export default function MyCourses() {
     
       return (
         <div className="mt-10">
-        <h1 className="text-4xl text-blue-500   font-extrabold  text-center">My Courses</h1>
+        <h1 className="text-4xl text-blue-500   font-extrabold  underline text-center">In Progress Courses</h1>
         <Flex direction="column" width="80%" p="20px" m="auto">
           <Slider {...settings}>
             {dummyData.map((el) => (
