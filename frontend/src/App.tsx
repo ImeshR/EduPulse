@@ -10,6 +10,8 @@ import CoursePage from './components/Home/Courses/CoursePage';
 import Payment from './pages/Payment';
 import MyCourse from './pages/MyCourse';
 import StudentDashboard from './pages/StudentDashboard/StudentDashboard';
+import AllCourses from './pages/StudentDashboard/AllCourses';
+import SearchResults from './pages/StudentDashboard/SearchResults';
 
 import AdminDashboard from './pages/Admin/AdminDashboard';
 
@@ -29,6 +31,9 @@ function App() {
             <Route path="/my-course" element={<MyCourse />} />
             <Route path="/admin/*" element={<AdminDashboard />} />
             <Route path="/student-dashboard" element={<StudentDashboard />} />
+            <Route path="/all-courses" element={<AllCourses />} />
+            <Route path="/search-results" element={<SearchResults />} />
+
             
           </Routes>
           <Footer />
