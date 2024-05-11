@@ -1,15 +1,20 @@
-import React, { useState } from 'react';
-import { Flex, Button } from '@chakra-ui/react';
-import Card from '../../components/Home/Courses/Card';
-import { Box } from '@chakra-ui/react';
-import SortSideBar from '../../components/StudentDashboard/SortSideBar';
+import React, { useState, useEffect } from "react";
+import { Flex, Button } from "@chakra-ui/react";
+import Card from "../../components/Home/Courses/Card";
+import { Box } from "@chakra-ui/react";
+import { useLocation } from "react-router-dom";
 
-export default function AllCourses() {
+export default function SearchResults() {
   const [currentPage, setCurrentPage] = useState(1);
-  const [sortOption, setSortOption] = useState({ type: '', order: '' });
   const coursesPerPage = 6;
+  const [searchQuery, setSearchQuery] = useState("");
+  const location = useLocation();
 
-  // Hardcoded data for demonstration
+  useEffect(() => {
+    const searchParams = new URLSearchParams(location.search);
+    setSearchQuery(searchParams.get("search") || "");
+  }, [location]); 
+
   const allCourses = [
     {
         _id: 1,
@@ -102,27 +107,10 @@ export default function AllCourses() {
         img: "/27.png",
       },
   ];
-
-  const paginate = (pageNumber) => setCurrentPage(pageNumber);
-
-  // Sorting function
-  const handleSort = (option, type) => {
-    setSortOption({ type, order: option });
-  };
-
-  // Sort courses based on selected option
-  let sortedCourses = [...allCourses];
-  if (sortOption.type === 'price') {
-    sortedCourses.sort((a, b) => {
-      return sortOption.order === 'asc' ? a.price - b.price : b.price - a.price;
-    });
-  } else if (sortOption.type === 'time') {
-    sortedCourses.sort((a, b) => {
-      const dateA = new Date(a.createdAt);
-      const dateB = new Date(b.createdAt);
-      return sortOption.order === 'latest' ? dateB - dateA : dateA - dateB;
-    });
-  }
+ // Filter courses based on search query
+  const filteredCourses = allCourses.filter((course) =>
+    course.title.toLowerCase().includes(searchQuery.toLowerCase())
+  );
 
   // Calculate the index of the last course on the current page
   const indexOfLastCourse = currentPage * coursesPerPage;
@@ -131,38 +119,45 @@ export default function AllCourses() {
   const indexOfFirstCourse = indexOfLastCourse - coursesPerPage;
 
   // Get the current courses for the current page
-  const currentCourses = sortedCourses.slice(indexOfFirstCourse, indexOfLastCourse);
+  const currentCourses = filteredCourses.slice(
+    indexOfFirstCourse,
+    indexOfLastCourse
+  );
 
   return (
-    <div className='py-8'>
-      <h1 className="text-4xl text-blue-500 font-extrabold text-center mt-10">All Courses</h1>
-      <Flex>
-      <SortSideBar handleSort={handleSort} />
-      
-        <Flex direction="column" width="80%" p="20px" m="auto">
-          <Flex flexWrap="wrap" justifyContent="center">
-            {/* Render sorted courses */}
-            {currentCourses.map((course) => (
-              <Box key={course._id} width={{ base: "100%", md: "50%", lg: "33.33%" }} p="10px">
-                <Card {...course} />
-              </Box>
-            ))}
-          </Flex>
+    <div className="py-8">
+      <h1 className="text-4xl text-blue-500 font-extrabold text-center mt-10">
+        {filteredCourses.length > 0 ? "Search Results" : "All Courses"}
+      </h1>
+      <Flex direction="column" width="80%" p="20px" m="auto">
+        <Flex flexWrap="wrap" justifyContent="center">
+          {/* Render filtered courses */}
+          {currentCourses.map((course) => (
+            <Box
+              key={course._id}
+              width={{ base: "100%", md: "50%", lg: "33.33%" }}
+              p="10px"
+            >
+              <Card {...course} />
+            </Box>
+          ))}
         </Flex>
       </Flex>
       {/* Pagination */}
-      {allCourses.length > coursesPerPage && (
+      {filteredCourses.length > coursesPerPage && (
         <Flex justifyContent="center" mt="20px">
-          {[...Array(Math.ceil(allCourses.length / coursesPerPage))].map((_, index) => (
-            <Button
-              key={index}
-              mx="2"
-              onClick={() => paginate(index + 1)}
-              colorScheme={currentPage === index + 1 ? 'blue' : 'gray'}
-            >
-              {index + 1}
-            </Button>
-          ))}
+          {[...Array(Math.ceil(filteredCourses.length / coursesPerPage))].map(
+            (_, index) => (
+              <Button
+                key={index}
+                mx="2"
+                onClick={() => setCurrentPage(index + 1)}
+                colorScheme={currentPage === index + 1 ? "blue" : "gray"}
+              >
+                {index + 1}
+              </Button>
+            )
+          )}
         </Flex>
       )}
     </div>
