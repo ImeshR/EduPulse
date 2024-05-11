@@ -122,7 +122,8 @@ const deleteCourse = async (id) => {
 };
 
 //enroll a user to a course
-const enrollUserToCourse = async (courseId, userId) => {
+const enrollUserToCourse = async (courseId, userId , transactionId) => {
+
   //find course by id
   const course = await getCourseById(courseId);
   if (!course) {
@@ -131,59 +132,62 @@ const enrollUserToCourse = async (courseId, userId) => {
     };
   }
 
-  //find user enrollment
+  // //find user enrollment
   const userEnrollment = await UserEnrollment.findOne({
     courseId,
     userId,
   });
 
-  if(userEnrollment){
+
+  if (!userEnrollment) {
+    const userEnrollment = new UserEnrollment({
+      userId,
+      courseId,
+      paymentId: transactionId,
+    });
+
+    //send email
+    await sendEmail(
+      "imesh6687@gmail.com",
+      "Course Enrollment",
+      `You have successfully enrolled to the course ${course.name}`,
+      `<p>
+      You have successfully enrolled to the course ${course.name}. 
+      Your payment of $${course.price} has been successfully processed.
+    </p>`
+    );
+
+    await userEnrollment.save();
+    return {
+      message: "User enrolled to the course successfully",
+      data: userEnrollment,
+    };
+  }
+
+  if (userEnrollment) {
     return {
       message: "User already enrolled to the course",
     };
   }
-
-  // //create payment intent
-  const response = await createPaymentIntent(userId, course.price, courseId);
-
-  // if (response.error) {
-  //   return {
-  //     message: "Failed to enroll user to the course",
-  //     error: response.error,
-  //   };
-  // }
-
-  // if (!userEnrollment) {
-  //   const userEnrollment = new UserEnrollment({
-  //     userId,
-  //     courseId,
-  //     paymentIntentId: response.data.id,
-  //   });
-
-  //   //send email
-  //   await sendEmail(
-  //     "imesh6687@gmail.com",
-  //     "Course Enrollment",
-  //     `You have successfully enrolled to the course ${course.name}`,
-  //     `<p>
-  //     You have successfully enrolled to the course ${course.name}. 
-  //     Your payment of $${course.price} has been successfully processed.
-  //   </p>`
-  //   );
-
-  //   await userEnrollment.save();
-  //   return {
-  //     message: "User enrolled to the course successfully",
-  //     data: userEnrollment,
-  //   };
-  // }
-
-  // if (userEnrollment) {
-  //   return {
-  //     message: "User already enrolled to the course",
-  //   };
-  // }
 };
+
+const cancelEnrollment = async (courseId, userId) => {
+  try {
+    const userEnrollment = await UserEnrollment.findOneAndDelete({
+      courseId,
+      userId,
+    });
+    return {
+      message: "User enrollment canceled successfully",
+      data: userEnrollment,
+    };
+  } catch (error) {
+    return {
+      message: "Failed to cancel user enrollment",
+      error: error.message,
+    };
+  }
+}
 
 export {
   createCourse,
@@ -192,4 +196,5 @@ export {
   getCourseById,
   deleteCourse,
   enrollUserToCourse,
+  cancelEnrollment,
 };

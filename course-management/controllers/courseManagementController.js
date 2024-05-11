@@ -1,5 +1,5 @@
 import express from 'express';
-import { createCourse, updateCourse , getAllCourses , getCourseById , deleteCourse ,enrollUserToCourse } from '../services/courseService.js';
+import { createCourse, updateCourse , getAllCourses , getCourseById , deleteCourse ,enrollUserToCourse , cancelEnrollment } from '../services/courseService.js';
 
 const router = express.Router();
 
@@ -59,8 +59,19 @@ router.delete("/:id", async (req, res) => {
 //enroll a user to a course
 router.post("/enroll", async (req, res) => {
   try {
+    const { courseId, userId , transactionId } = req.body;
+    const course = await enrollUserToCourse(courseId, userId , transactionId);
+    res.json(course);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+//cancel a user enrollment to a course
+router.post("/cancelEnrollment", async (req, res) => {
+  try {
     const { courseId, userId } = req.body;
-    const course = await enrollUserToCourse(courseId, userId);
+    const course = await cancelEnrollment(courseId, userId);
     res.json(course);
   } catch (error) {
     res.status(500).json({ error: error.message });

@@ -218,7 +218,7 @@ const createPaymentIntent = async (userId, amount, courseId) => {
     };
 
     // Save the payment transaction in the database
-    await savePaymentTransaction(transaction);
+    const response =  await savePaymentTransaction(transaction);
 
     //send email to user
     await sendEmail(
@@ -234,7 +234,7 @@ const createPaymentIntent = async (userId, amount, courseId) => {
 
     return {
       message: "Payment intent created successfully",
-      data: paymentIntent,
+      data: response.data,
     };
   } catch (error) {
     console.error(error);
