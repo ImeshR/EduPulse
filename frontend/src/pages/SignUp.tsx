@@ -1,6 +1,8 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { RiGoogleFill, RiFacebookFill } from "react-icons/ri";
+import axios from "axios";
+import Swal from "sweetalert2";
 
 export default function SignUp() {
   const [password, setPassword] = useState("");
@@ -8,11 +10,48 @@ export default function SignUp() {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [role, setRole] = useState("");
+  const navigate = useNavigate();
 
-  const handleSignUp = (e) => {
+  const handleSignUp = async (e) => {
     e.preventDefault();
     // Handle signup logic here
     console.log("Signup Details:", { email, password, firstName, lastName, role });
+    try {
+      const response = await axios.post("http://localhost:5050/api/auth/register", {
+        firstName,
+        lastName,
+        email,
+        password,
+        role,
+      });
+
+      console.log("Signup Response:", response);
+
+      if (response.status === 201) {
+        //sweetalert2 alert
+        Swal.fire({
+          title: "Account Created",
+          text: "Your account has been created successfully!",
+          icon: "success",
+          confirmButtonText: "Continue",
+        });
+
+        // Redirect to login page
+        navigate("/sign-in");
+
+      }
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch (error: any) {
+      console.log("Signup Error:", error);
+      //sweetalert2 alert
+      Swal.fire({
+        title: "Error",
+        text: error.response.data.message,
+        icon: "error",
+        confirmButtonText: "Try Again",
+      });
+    }
+
   };
 
   return (
@@ -30,14 +69,14 @@ export default function SignUp() {
           </button>
           <form onSubmit={handleSignUp}>
             <div className="login__inputs flex flex-col">
-            <select
+              <select
                 className="mb-2 px-2 py-2 border border-black rounded-md"
                 value={role}
                 onChange={(e) => setRole(e.target.value)}
                 required
               >
                 <option value="">Select Role</option>
-                <option value="student">Student</option>
+                <option value="user">Student</option>
                 <option value="creator">Creator</option>
               </select>
               <input
@@ -56,7 +95,7 @@ export default function SignUp() {
                 onChange={(e) => setLastName(e.target.value)}
                 required
               />
-              
+
               <input
                 type="text"
                 placeholder="Email"

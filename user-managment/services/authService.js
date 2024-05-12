@@ -19,8 +19,9 @@ const registerUser = async (userData) => {
     // Check if user already exists
     const user = await User.findOne({ email: userData.email });
 
+    // If user exists, throw an error
     if (user) {
-      return { error: "User already exists" };
+      throw new Error("User already exists");
     }
     // Hash password
     const hashedPassword = await bcrypt.hash(password, 10);
@@ -32,25 +33,31 @@ const registerUser = async (userData) => {
       role: role || "user",
     });
 
+    // Save user to database
+    const res = await newUser.save();
+
     //send email to user
-    const subject = "Registration Successful";
-    const text = `Welcome ${firstName} ${lastName}, you have successfully registered.`;
-    const html = `
+    try {
+      const subject = "Registration Successful";
+      const text = `Welcome ${firstName}, you have successfully registered.`;
+      const html = `
                   <html>
                    <head>
                       <title>Registration Successful</title>
                    </head>
                     <body>
-                      <h1>Welcome ${firstName} ${lastName} to EduPulse!</h1>
+                      <h3>Welcome ${firstName} ${lastName} to EduPulse!</h3>
                       <p>Your registration was successful.</p>
-                      <p>Thank you for signing up!</p>
                     </body>
-                  </html>
+                  </html> 
     `;
-    await sendEmail(email, subject, text, html);
+      await sendEmail(userData.email, subject, text, html);
+    } catch (error) {
+      console.log("Failed to send email");
+    }
 
     return {
-      user: await newUser.save(),
+      user: res,
       message: "User registered successfully",
     };
   } catch (error) {
@@ -101,7 +108,7 @@ const loginUser = async (email, password) => {
         role: user.role,
       },
       jwtSecret,
-      { expiresIn: "1h" }
+      { expiresIn: "3h" }
     );
     return token;
   } catch (error) {

@@ -14,6 +14,7 @@ import AllCourses from './pages/StudentDashboard/AllCourses';
 import SearchResults from './pages/StudentDashboard/SearchResults';
 
 import AdminDashboard from './pages/Admin/AdminDashboard';
+import { UserProvider } from './UserContext';
 
 
 function App() {
