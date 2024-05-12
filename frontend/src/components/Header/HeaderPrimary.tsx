@@ -15,6 +15,8 @@ function HeaderPrimary() {
     }
   };
 
+  console.log(user)
+
   return (
     <div>
       <div className="headerPrimary bg-[#ffffff] flex justify-between items-center h-20 shadow-lg px-4 sm:px-6 lg:px-8 text-base">

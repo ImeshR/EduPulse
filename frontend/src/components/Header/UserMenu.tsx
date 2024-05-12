@@ -8,6 +8,7 @@ import {
   
 } from "@chakra-ui/react";
 import { FaUserGraduate } from "react-icons/fa6";
+import { Link } from "react-router-dom";
 
 const UserMenu = () => {
   return (
@@ -18,8 +19,8 @@ const UserMenu = () => {
         variant="link"
       />
       <MenuList>
-        <MenuItem>Profile</MenuItem>
-        <MenuItem>Dashboard</MenuItem>
+      <Link to="/user-profile"><MenuItem>Profile</MenuItem></Link>
+        <Link to="student-dashboard"><MenuItem>Dashboard</MenuItem></Link> 
         <MenuItem>Logout</MenuItem>
       </MenuList>
     </Menu>

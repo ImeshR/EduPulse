@@ -5,7 +5,7 @@ import PaymentCover from '/21.png'
 import { Link } from 'react-router-dom'
 
 
-export default function PaymentManagement() {
+export default function CreatorPaymentManage() {
   console.log('CourseManagement.tsx')
   return (
    
@@ -25,7 +25,7 @@ export default function PaymentManagement() {
         {/* View My Courses Card */}
         <div className="w-96 h-52 shadow-2xl bg-blue-50 rounded-lg  p-6 flex flex-col items-center justify-center transform transition-transform hover:scale-105">
           <FaEye className="text-4xl text-green-500 mb-4" />
-          <h2 className="text-xl font-bold">View Transction data </h2>
+          <h2 className="text-xl font-bold">View My Transction Data </h2>
           <p className="text-lg text-gray-600 mt-2">Browse and manage Payment data</p>
           
         </div>

@@ -19,8 +19,8 @@ const AdminDashboard = () => {
           <Route path="/" element={<Navigate to="user-management" />} />
           <Route path="user-management" element={<UserManagement />} />
           <Route path="course-management" element={<CourseManagement />} />
-          <Route path="payment-management" element={<FeedbackManagement />} />
-          <Route path="feedback-management" element={<PaymentManagement />} />
+          <Route path="feedback-management" element={<FeedbackManagement />} />
+          <Route path="payment-management" element={<PaymentManagement />} />
           <Route path="create-course" element={<CreateCourse />} />
         </Routes>
       </div>

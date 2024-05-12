@@ -1,13 +1,19 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import AdminPic from '/admin.png';
 
 const Sidebar = () => {
   const { pathname } = useLocation();
 
   return (
     <div className="bg-gray-50 min-h-screen text-white w-64 flex flex-col border-r-4 shadow-xl border-t-4 ">
+      <Link to="/admin" >
       <div className="p-4 text-xl text-center text-gray-700 font-bold">Admin Panel</div>
-      <div className="border-t text-gray-700 font-mono border-gray-200">
+      </Link>
+      <img src={AdminPic} alt="Admin" className="w-32 h-32 mx-auto mb-8" />
+
+
+      <div className="border-t text-gray-700 items-center justify-center  font-mono border-gray-200">
         <Link
           to="/admin/user-management"
           className={`block px-4 py-2 ${

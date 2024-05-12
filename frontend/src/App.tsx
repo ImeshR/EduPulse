@@ -12,8 +12,10 @@ import MyCourse from './pages/MyCourse';
 import StudentDashboard from './pages/StudentDashboard/StudentDashboard';
 import AllCourses from './pages/StudentDashboard/AllCourses';
 import SearchResults from './pages/StudentDashboard/SearchResults';
+import UserProfile from './pages/UserProfile';
 
 import AdminDashboard from './pages/Admin/AdminDashboard';
+import CreatorDashboard from './pages/Creator/CreatorDashboard';
 import { UserProvider } from './UserContext';
 
 
@@ -31,10 +33,14 @@ function App() {
             <Route path="/course/:id" element={<CoursePage />} />
             <Route path="/payment" element={<Payment />} />
             <Route path="/my-course" element={<MyCourse />} />
-            <Route path="/admin/*" element={<AdminDashboard />} />
-            <Route path="/student-dashboard" element={<StudentDashboard />} />
+            
             <Route path="/all-courses" element={<AllCourses />} />
             <Route path="/search-results" element={<SearchResults />} />
+            <Route path="/user-profile" element={<UserProfile />} />
+
+            <Route path="/student-dashboard" element={<StudentDashboard />} />
+            <Route path="/admin/*" element={<AdminDashboard />} />
+            <Route path="/creator/*" element={<CreatorDashboard />} />
 
             
           </Routes>
