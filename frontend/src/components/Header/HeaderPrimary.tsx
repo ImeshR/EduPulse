@@ -1,9 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { RiShoppingCartLine, RiSearchLine } from "react-icons/ri";
 import { Link } from "react-router-dom";
+import { UserContext } from "../../UserContext";
+
+import UserMenu from "./UserMenu"; 
 
 function HeaderPrimary() {
   const [searchQuery, setSearchQuery] = useState("");
+  const { user } = useContext(UserContext); // Access user data from UserContext
 
   const handleSearch = (e) => {
     if (e.key === "Enter") {
@@ -49,16 +53,26 @@ function HeaderPrimary() {
           <div className="cartDiv ml-4">
             <RiShoppingCartLine className="icon" />
           </div>
-          <Link to="/sign-in">
-            <div className="login button bg-white text-slate-700  shadow-lg border  hover:text-slate-900 rounded-md px-4 py-1 ml-4 cursor-pointer">
-              Log In
+          {user ? (
+            // Render UserMenu component if user is logged i
+            <div className="pl-4">
+            <UserMenu />
+          </div>
+          ) : (
+            // Render Sign In and Sign Up links if user is not logged in
+            <div className="right flex font-sans items-center">
+              <Link to="/sign-in">
+                <div className="login button bg-white text-slate-700  shadow-lg border  hover:text-slate-900 rounded-md px-4 py-1 ml-4 cursor-pointer">
+                  Log In
+                </div>
+              </Link>
+              <Link to="/sign-up">
+                <div className="signup button bg-blue-400 text-white border shadow-lg hover:bg-blue-500 rounded-md px-4 py-1 ml-2 cursor-pointer">
+                  Sign up
+                </div>
+              </Link>
             </div>
-          </Link>
-          <Link to="/sign-up">
-            <div className="signup button bg-blue-400 text-white border shadow-lg hover:bg-blue-500 rounded-md px-4 py-1 ml-2 cursor-pointer">
-              Sign up
-            </div>
-          </Link>
+          )}
         </div>
       </div>
     </div>

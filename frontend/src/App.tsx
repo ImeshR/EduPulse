@@ -20,6 +20,7 @@ import { UserProvider } from './UserContext';
 function App() {
   return (
     <ChakraProvider>
+      <UserProvider>
       <BrowserRouter>
         <div className='min-h-screen'> 
           <HeaderPrimary />
@@ -40,6 +41,7 @@ function App() {
           <Footer />
         </div>
       </BrowserRouter>
+      </UserProvider>
     </ChakraProvider>
   );
 }
