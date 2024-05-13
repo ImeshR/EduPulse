@@ -23,19 +23,24 @@ export default function FeedbackManagement() {
         
 
         {/* View student feedback Card */}
+        <Link to="/admin/view-student-feedback">
         <div className="w-96 h-52 shadow-2xl bg-blue-50 rounded-lg  p-6 flex flex-col items-center justify-center transform transition-transform hover:scale-105">
           <FaEye className="text-4xl text-green-500 mb-4" />
           <h2 className="text-xl font-bold">View Student Feedback </h2>
           <p className="text-lg text-gray-600 mt-2">Browse and view feedback from students</p>
           
         </div>
+        </Link>
 
+        {/* View creator feedback Card */}
+        <Link to="/admin/view-creator-feedback">
         <div className="w-96 h-52 shadow-2xl bg-blue-50 rounded-lg  p-6 flex flex-col items-center justify-center transform transition-transform hover:scale-105">
           <FaEye className="text-4xl text-green-500 mb-4" />
           <h2 className="text-xl font-bold">View Creator Feedback </h2>
           <p className="text-lg text-gray-600 mt-2">Browse and view feedback from creators</p>
           
         </div>
+        </Link>
       </div>
     </div>
   )

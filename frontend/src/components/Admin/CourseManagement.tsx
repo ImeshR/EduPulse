@@ -29,11 +29,13 @@ export default function CourseManagement() {
         </Link>
 
         {/* View My Courses Card */}
+        <Link to="/admin/view-all-courses">
         <div className="w-96 h-52 shadow-2xl bg-blue-50 rounded-lg  p-6 flex flex-col items-center justify-center transform transition-transform hover:scale-105">
           <FaEye className="text-4xl text-green-500 mb-4" />
-          <h2 className="text-xl font-bold">View My Courses</h2>
-          <p className="text-lg text-gray-600 mt-2">Browse and manage your existing courses</p>
+          <h2 className="text-xl font-bold">View All Courses</h2>
+          <p className="text-lg text-gray-600 mt-2">Browse and manage All existing courses</p>
         </div>
+        </Link>
       </div>
     </div>
   )
