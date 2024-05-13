@@ -125,8 +125,7 @@ const deleteCourse = async (id) => {
 };
 
 //enroll a user to a course
-const enrollUserToCourse = async (courseId, userId , transactionId) => {
-
+const enrollUserToCourse = async (courseId, userId, transactionId) => {
   //find course by id
   const course = await getCourseById(courseId);
   if (!course) {
@@ -135,12 +134,11 @@ const enrollUserToCourse = async (courseId, userId , transactionId) => {
     };
   }
 
-  // //find user enrollment
+  //find user enrollment
   const userEnrollment = await UserEnrollment.findOne({
     courseId,
     userId,
   });
-
 
   if (!userEnrollment) {
     const userEnrollment = new UserEnrollment({
@@ -153,10 +151,10 @@ const enrollUserToCourse = async (courseId, userId , transactionId) => {
     await sendEmail(
       "imesh6687@gmail.com",
       "Course Enrollment",
-      `You have successfully enrolled to the course ${course.name}`,
+      `You have successfully enrolled to the course ${course.data.name}`,
       `<p>
-      You have successfully enrolled to the course ${course.name}. 
-      Your payment of $${course.price} has been successfully processed.
+      You have successfully enrolled to the course ${course.data.name}. 
+      Your payment  has been successfully processed.
     </p>`
     );
 
@@ -190,7 +188,7 @@ const cancelEnrollment = async (courseId, userId) => {
       error: error.message,
     };
   }
-}
+};
 
 export {
   createCourse,
