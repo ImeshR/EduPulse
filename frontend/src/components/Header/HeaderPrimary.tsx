@@ -3,7 +3,7 @@ import { RiShoppingCartLine, RiSearchLine } from "react-icons/ri";
 import { Link } from "react-router-dom";
 import { UserContext } from "../../UserContext";
 
-import UserMenu from "./UserMenu"; 
+import UserMenu from "./UserMenu";
 
 function HeaderPrimary() {
   const [searchQuery, setSearchQuery] = useState("");
@@ -15,7 +15,9 @@ function HeaderPrimary() {
     }
   };
 
-  console.log(user)
+  console.log(user);
+
+
 
   return (
     <div>
@@ -46,22 +48,40 @@ function HeaderPrimary() {
           </div>
         </div>
         <div className="right flex font-sans items-center">
-          <div className="w-20 mx-10">
-            <span className="business">Your Dashboard</span>
-          </div>
-          <div className="w-20">
-            <span className="teach">Teach on EduPulse</span>
-          </div>
-          <div className="cartDiv ml-4">
-            <RiShoppingCartLine className="icon" />
-          </div>
           {user ? (
-            // Render UserMenu component if user is logged i
-            <div className="pl-4">
-            <UserMenu />
-          </div>
+            <>
+              {user.role === "admin" && (
+                <div className="w-20 mx-10">
+                  <span className="business">
+                    <Link to="/admin">Your Dashboard</Link>
+                  </span>
+                </div>
+              )}
+              {user.role === "creator" && (
+                <div className="w-20 mx-10">
+                  <span className="business">
+                    <Link to="/creator">Your Dashboard</Link>
+                  </span>
+                </div>
+              )}
+              {user.role === "user" && (
+                <div className="w-20 mx-10">
+                  <span className="business">
+                    <Link to="/student-dashboard">Your Dashboard</Link>
+                  </span>
+                </div>
+              )}
+              <div className="w-20">
+                <span className="teach">Teach on EduPulse</span>
+              </div>
+              <div className="cartDiv ml-4">
+                <RiShoppingCartLine className="icon" />
+              </div>
+              <div className="pl-4">
+                <UserMenu />
+              </div>
+            </>
           ) : (
-            // Render Sign In and Sign Up links if user is not logged in
             <div className="right flex font-sans items-center">
               <Link to="/sign-in">
                 <div className="login button bg-white text-slate-700  shadow-lg border  hover:text-slate-900 rounded-md px-4 py-1 ml-4 cursor-pointer">
