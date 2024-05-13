@@ -4,6 +4,7 @@ import { MdDelete } from "react-icons/md";
 import { IoAddCircleSharp } from "react-icons/io5";
 import { MdDeleteForever } from "react-icons/md";
 import { MdAddToPhotos } from "react-icons/md";
+import axios from "axios";
 
 const CreateCourse = () => {
   const initialValues = {
@@ -19,7 +20,7 @@ const CreateCourse = () => {
   const onSubmit = async (values) => {
     try {
       // Send the form data to the backend API
-      const response = await axios.post("/api/courses", values);
+      const response = await axios.post("http://localhost:7070/api/courseManagement/create", values);
       console.log(response.data); // Handle the response as needed
     } catch (error) {
       console.error(error);
@@ -65,6 +66,9 @@ const CreateCourse = () => {
     updatedCourseContent[contentIndex].instructions.splice(instructionIndex, 1);
     formik.setFieldValue("courseContent", updatedCourseContent);
   };
+
+  /* console log enterd data */
+  console.log(formik.values);
 
   return (
     <div className="max-w-5x font-mono font-semibold mx-auto min-h-screen">
