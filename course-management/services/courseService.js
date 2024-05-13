@@ -1,8 +1,6 @@
 import Course from "../models/course.js";
 import UserEnrollment from "../models/userEnrollment.js";
-import { createPaymentIntent } from "../../payment-management/services/stripeService.js";
 import { sendEmail } from "./emailService.js";
-import { get } from "http";
 
 //create a course
 const createCourse = async (

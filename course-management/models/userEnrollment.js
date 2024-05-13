@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
-import User from "../../user-managment/models/Users.js";
+import User from "./Users.js";
 import Course from "./course.js";
-import PaymentTransaction from "../../payment-management/models/paymentTransaction.js";
+import PaymentTransaction from "./paymentTransaction.js";
 
 // Register the User model with Mongoose
 const UserModel = mongoose.models.User || mongoose.model("User", User.schema);

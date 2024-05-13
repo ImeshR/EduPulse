@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import User from "../../user-managment/models/Users.js";
+import User from "./Users.js";
 
 // Register the User model with Mongoose
 const UserModel = mongoose.model('User', User.schema);
