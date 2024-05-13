@@ -35,6 +35,10 @@ const courseSchema = new Schema({
     ref: UserModel,
     required: true,
   },
+  img : {
+    type: String,
+    default: "https://www.vecteezy.com/photo/3595752-love-writing-memorizing-love-reading-to-increase-knowledge"
+  },
   price: {
     type: Number,
     required: true,
