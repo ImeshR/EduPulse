@@ -4,13 +4,20 @@ import { MdDelete } from "react-icons/md";
 import { IoAddCircleSharp } from "react-icons/io5";
 import { MdDeleteForever } from "react-icons/md";
 import { MdAddToPhotos } from "react-icons/md";
+import { UserContext} from "../../UserContext"
+import { useContext } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 
+
 const CreateCourse = () => {
+  const { user } = useContext(UserContext);
+  const userID = user?.id;
+
   const initialValues = {
     name: "",
     description: "",
-    createdBy: "",
+    createdBy: userID || "", // Set to empty string if userID is not available yet
     price: 0,
     duration: 0,
     summary: [],
@@ -20,7 +27,16 @@ const CreateCourse = () => {
   const onSubmit = async (values) => {
     try {
       // Send the form data to the backend API
-      const response = await axios.post("http://localhost:7070/api/courseManagement/create", values);
+      const response = await axios.post(
+        "http://localhost:7070/api/courseManagement/create",
+        values,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        }
+      );
       console.log(response.data); // Handle the response as needed
     } catch (error) {
       console.error(error);
@@ -67,7 +83,6 @@ const CreateCourse = () => {
     formik.setFieldValue("courseContent", updatedCourseContent);
   };
 
-  /* console log enterd data */
   console.log(formik.values);
 
   return (
@@ -105,21 +120,6 @@ const CreateCourse = () => {
               rows="4"
             />
 
-          </div>
-
-          <div className="mb-4">
-            <label htmlFor="createdBy" className="block mb-1">
-              Created By:
-            </label>
-            <input
-              id="createdBy"
-              name="createdBy"
-              type="text"
-              onChange={formik.handleChange}
-              value={formik.values.createdBy}
-              placeholder="Enter creator name"
-              className="w-full border shadow-md  bg-blue-50 border-gray-300 rounded px-3 py-2 focus:outline-none focus:border-blue-500"
-            />
           </div>
 
           <div className="mb-4">
