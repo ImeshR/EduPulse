@@ -3,7 +3,7 @@ import { Box, Flex, Image, Text } from "@chakra-ui/react";
 import { FaGraduationCap } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
-const Card = ({ _id, course, title, category, description, img }) => {
+const Card = ({ _id, course, name, category, description, img }) => {
   const image = [
     "https://d3njjcbhbojbot.cloudfront.net/api/utilities/v1/imageproxy/https://s3.amazonaws.com/coursera_assets/ddp/branding/mba-macquarie/thumbnail.jpg?auto=format%2Ccompress%2C%20enhance&dpr=1&w=265&h=204&fit=crop&q=50",
     "https://d3njjcbhbojbot.cloudfront.net/api/utilities/v1/imageproxy/https://s3.amazonaws.com/coursera_assets/ddp/branding/bachelor-of-science-computer-science-bits/2c1c9800-93b0-48df-b278-a5246da9e086.jpg?auto=format%2Ccompress%2C%20enhance&dpr=1&w=265&h=204&q=50&fit=crop",
@@ -32,7 +32,7 @@ const Card = ({ _id, course, title, category, description, img }) => {
         }}
         _hover={{ boxShadow: "2xl", cursor: "pointer" }}
       >
-        <Image src={img || image[Math.floor(Math.random() * length)]} alt={title} objectFit="cover" h="150px" />
+        <Image src={img || image[Math.floor(Math.random() * length)]} alt={name} objectFit="cover" h="150px" />
         <Box display="flex" alignItems="center" mb={2}>
           <Image src={miniimg} alt="Logo" boxSize={4} mr={2} />
           <Text fontSize="sm" fontWeight="bold" color="#a7a7a7" textTransform="capitalize">
@@ -40,7 +40,7 @@ const Card = ({ _id, course, title, category, description, img }) => {
           </Text>
         </Box>
         <Text fontSize="lg" fontWeight="bold" mb={2} textTransform="capitalize">
-          {title}
+          {name}
         </Text>
         <Text fontSize="sm" mb={2} textTransform="capitalize">
           {description.substring(0, 80)}...

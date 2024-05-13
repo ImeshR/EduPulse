@@ -10,42 +10,26 @@ export default function Swiper() {
   const dummyData = [
     {
       _id: 1,
-      title: "React Course",
+      name: "React Course",
       category: "Web Development",
       description: "Learn React for building modern web applications.",
       course: "React",
       img: "/react.png",
-      whatYouLearn: [
-        "Build a React application from scratch",
-        "Learn React hooks",
-        "Understand React routing",
-        "Build responsive web applications",
-      ],
-      price: 100,
-      Author: "John Doe",
-
+    
     },
     {
       _id: 2,
-      title: "JavaScript Course",
+      name: "JavaScript Course",
       category: "Web Development",
       description: "Master JavaScript for frontend and backend development.",
       course: "JavaScript",
       img: "/js.png",
-      whatYouLearn: [
-        "Understand JavaScript fundamentals",
-        "Learn ES6 features",
-        "Build a JavaScript project",
-        "Understand JavaScript closures",
-      ],
-      price: 100,
-      Author: "John Doe",
-
+     
 
     },
     {
       _id: 3,
-      title: "AWS Course",
+      name: "AWS Course",
       category: "Cloud Computing",
       description: "Become proficient in AWS cloud services.",
       course: "AWS",
@@ -53,14 +37,14 @@ export default function Swiper() {
     },
     {
       _id: 3,
-      title: "Html",
+      name: "Html",
       category: "Web Development",
       description: "Learn HTML for building web pages.",
       img: "/html.png",
     },
     {
       _id: 4,
-      title: "HTML/CSS/JS Course",
+      name: "HTML/CSS/JS Course",
       category: "Web Development",
       description: "Learn the basics of web development with HTML, CSS, and JavaScript.",
       course: "HTML/CSS/JS",
@@ -68,7 +52,7 @@ export default function Swiper() {
     },
     {
       _id: 5,
-      title: "PHP Course",
+      name: "PHP Course",
       category: "Web Development",
       description: "Master PHP for server-side web development.",
       course: "PHP",
@@ -76,7 +60,7 @@ export default function Swiper() {
     },
     {
       _id: 6,
-      title: "Java Course",
+      name: "Java Course",
       category: "Software Development",
       description: "Learn Java programming for building applications.",
       course: "Java",
@@ -84,7 +68,7 @@ export default function Swiper() {
     },
     {
       _id: 7,
-      title: "C++ Course",
+      name: "C++ Course",
       category: "Software Development",
       description: "Master C++ programming for system and application development.",
       course: "C++",
@@ -92,7 +76,7 @@ export default function Swiper() {
     },
     {
       _id: 8,
-      title: "Docker Course",
+      name: "Docker Course",
       category: "DevOps",
       description: "Learn Docker for containerization and deployment.",
       course: "Docker",

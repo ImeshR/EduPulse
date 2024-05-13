@@ -8,12 +8,11 @@ const CoursePage = () => {
   const { id } = useParams<{ id: string }>();
   const courseData = {
     _id: id,
-    title: "React Course",
+    name: "React Course",
     category: "Web Development",
     description: "Learn React for building modern web applications Learn React for building modern web applications Learn React for building modern web applications Learn React for building modern web applications Learn React for building modern web applications.",
-    course: "React",
     img: "/react.png",
-    whatYouLearn: [
+    summary: [
       "Build enterprise level Node applications and deploy to the cloud (AWS)",
       "Work with real life data and SpaceX API to build a NASA launch system, discover new planets that may contain life + other projects",
       "Become the top 10% Node Developer. Learn REALLY advanced topics!",
@@ -26,7 +25,7 @@ const CoursePage = () => {
     rating: 4.8,
     ratingsCount: 12866,
     studentsCount: 69107,
-    lastUpdated: "5/2023",
+    duration: "16hr",
     language: "English",
     autoLanguages: ["English", "Arabic"],
     moreLanguagesCount: 12,
@@ -57,7 +56,7 @@ const CoursePage = () => {
                   <Box className="space-y-2">
                     <Box className="title" fontWeight="bold">
                       <Heading as="h3" fontSize="2rem">
-                        {courseData.title}
+                        {courseData.name}
                       </Heading>
                     </Box>
 
@@ -81,10 +80,10 @@ const CoursePage = () => {
                       <Box className="text-[12px] underline text-blue-500">
                         {courseData.author}
                       </Box>
-                    </Box>
+                    </Box> 
 
                     <Box className="text-[12px]  space-x-4" display="flex">
-                      <Box>🌗 Last updated {courseData.lastUpdated}</Box>
+                      <Box>🌗 Course Duration {courseData.duration}</Box>
                       <Box>🌐 {courseData.language}</Box>
                       <Box display="flex">
                         ⌨️ {courseData.autoLanguages.join("[Auto], ")}{" , "}
@@ -110,15 +109,12 @@ const CoursePage = () => {
         <div className="xl:mr-24 mt-10">
           <div className="max-w-[598px] xl:mr-96">
             <div className="border my-5 py-5 max-w-[598px] p-4 shadow-md border-slate-100 text-black bg-white">
-              
-            
-              
-              
+
               <div className="py-2">
                 <h3 className="text-lg font-bold pb-4">What you'll learn</h3>
               </div>
               <div className="grid font-semibold text-slate-700 grid-cols-1 sm:grid-cols-2 gap-y-1.5">
-                {courseData.whatYouLearn.map((item, index) => (
+                {courseData.summary.map((item, index) => (
                   <div key={index} className="flex items-center space-x-4">
                     <div className="flex items-center space-x-2">
                       <div className="text-[12px]">📚</div>
@@ -138,11 +134,11 @@ const CoursePage = () => {
               </div>
               <div className="flex items-center space-x-1">
                 <div className="text-[12px] font-semibold">🖊️ Title:</div>
-                <div className="text-[12px]">{courseData.title}</div>
+                <div className="text-[12px]">{courseData.name}</div>
               </div>
               <div className="flex items-center space-x-1">
                 <div className="text-[12px] font-semibold">🕔 Last updated:</div>
-                <div className="text-[12px]">{courseData.lastUpdated}</div>
+                <div className="text-[12px]">{courseData.duration}</div>
              </div>
             </div>
 
