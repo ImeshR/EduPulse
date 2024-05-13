@@ -21,6 +21,7 @@ router.post("/create", async (req, res) => {
       description,
       summary,
       createdBy,
+      img,
       price,
       duration,
       courseContent,
@@ -30,6 +31,7 @@ router.post("/create", async (req, res) => {
       description,
       summary,
       createdBy,
+      img,
       price,
       duration,
       courseContent

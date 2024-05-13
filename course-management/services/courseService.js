@@ -10,6 +10,7 @@ const createCourse = async (
   description,
   summary,
   createdBy,
+  img,
   price,
   duration,
   courseContent
@@ -20,6 +21,7 @@ const createCourse = async (
       description,
       summary,
       createdBy,
+      img,
       price,
       duration,
       courseContent,

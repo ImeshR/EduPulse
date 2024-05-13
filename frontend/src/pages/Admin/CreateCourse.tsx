@@ -4,11 +4,25 @@ import { MdDelete } from "react-icons/md";
 import { IoAddCircleSharp } from "react-icons/io5";
 import { MdDeleteForever } from "react-icons/md";
 import { MdAddToPhotos } from "react-icons/md";
-import { UserContext} from "../../UserContext"
+import { UserContext } from "../../UserContext"
 import { useContext } from "react";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import axios from "axios";
+import { initializeApp } from "firebase/app";
+import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 
+// Initialize Firebase
+const firebaseConfig = {
+  apiKey: "AIzaSyAelJ7dlq9btLTsRbGRQKj8p1XRrlo8cVo",
+  authDomain: "codewave-39524.firebaseapp.com",
+  projectId: "codewave-39524",
+  storageBucket: "codewave-39524.appspot.com",
+  messagingSenderId: "1035711570286",
+  appId: "1:1035711570286:web:784b4042cc0cd42cac617f",
+  measurementId: "G-5C37XVK0HF"
+};
+
+const app = initializeApp(firebaseConfig);
 
 const CreateCourse = () => {
   const { user } = useContext(UserContext);
@@ -24,8 +38,37 @@ const CreateCourse = () => {
     courseContent: [{ videoLink: "", instructions: [] }],
   };
 
+  const [imageFile, setImageFile] = useState(null);
+
+  const handleImageChange = (event) => {
+    const file = event.target.files[0];
+    setImageFile(file);
+  };
+
+  const uploadImageToFirebase = async () => {
+    try {
+      if (!imageFile) {
+        throw new Error("No image file selected.");
+      }
+
+      const storage = getStorage(app);
+      const storageRef = ref(storage);
+      const imageRef = ref(storageRef, `images/${imageFile.name}`);
+      await uploadBytes(imageRef, imageFile);
+      const imageLink = await getDownloadURL(imageRef);
+      return imageLink;
+    } catch (error) {
+      console.error("Error uploading image:", error);
+      return null;
+    }
+  };
+
   const onSubmit = async (values) => {
     try {
+      const imageLink = await uploadImageToFirebase();
+
+
+      values.img = imageLink;
       // Send the form data to the backend API
       const response = await axios.post(
         "http://localhost:7070/api/courseManagement/create",
@@ -90,9 +133,22 @@ const CreateCourse = () => {
       <h1 className="text-2xl font-semibold text-center mt-8 mb-4">Create a Course</h1>
       <form onSubmit={formik.handleSubmit} className="grid grid-cols-2 gap-6">
 
-      <div className="col-span-2">
-
-      <div className="mb-4">
+        <div className="col-span-2">
+          <div>
+            <div className="mb-4">
+              <label htmlFor="image" className="block mb-1">
+                Image:
+              </label>
+              <input
+                id="img"
+                name="img"
+                type="file"
+                onChange={handleImageChange}
+                className="w-full border shadow-md bg-blue-50 border-gray-300 rounded px-3 py-2 focus:outline-none focus:border-blue-500"
+              />
+            </div>
+          </div>
+          <div className="mb-4">
             <label htmlFor="name" className="block mb-1">
               Name:
             </label>
@@ -152,12 +208,12 @@ const CreateCourse = () => {
             />
           </div>
 
-         
+
         </div>
 
 
         <div>
-          
+
 
           <div className="mb-4">
             <label htmlFor="summary" className="block mb-1">
@@ -179,7 +235,7 @@ const CreateCourse = () => {
                   className="  px-4 py-2 text-2xl rounded text-red-500 hover:text-red-600 focus:outline-none"
                 >
                   <MdDelete />
-                  
+
                 </button>
               </div>
             ))}
@@ -188,8 +244,8 @@ const CreateCourse = () => {
               onClick={addSummaryPoint}
               className="text-blue-500 text-4xl px-4 py-2 rounded hover:text-blue-600 focus:outline-none"
             >
-              <IoAddCircleSharp/>
-              
+              <IoAddCircleSharp />
+
             </button>
           </div>
         </div>
@@ -231,7 +287,7 @@ const CreateCourse = () => {
                         className="text-red-500 text-2xl  px-4 py-2 rounded hover:text-red-600 focus:outline-none"
                       >
                         <MdDeleteForever />
-                        
+
                       </button>
                     </div>
                   ))}
@@ -240,7 +296,7 @@ const CreateCourse = () => {
                     onClick={() => addInstruction(contentIndex)}
                     className="text-blue-500   px-4 py-1 rounded hover:text-blue-600 focus:outline-none"
                   >
-                   <span className="flex space-x-2 flex-row"> <MdAddToPhotos className="text-2xl"  /> <span className="text-blue-500">Instruction</span></span>
+                    <span className="flex space-x-2 flex-row"> <MdAddToPhotos className="text-2xl" /> <span className="text-blue-500">Instruction</span></span>
                   </button>
                 </div>
 
@@ -249,7 +305,7 @@ const CreateCourse = () => {
                   onClick={() => removeCourseContent(contentIndex)}
                   className="  rounded-xl text-red-600 px-4 py-1   mt-2 focus:outline-none"
                 >
-                  <span className="flex hover:text-red-800 space-x-2 flex-row"> <MdDeleteForever className="text-2xl"  /> <span className="text-red-500">Course Content</span></span>
+                  <span className="flex hover:text-red-800 space-x-2 flex-row"> <MdDeleteForever className="text-2xl" /> <span className="text-red-500">Course Content</span></span>
                 </button>
               </div>
             ))}
@@ -264,13 +320,13 @@ const CreateCourse = () => {
         </div>
 
         <div className="col-span-2 mt-2 flex justify-center">
-  <button
-    type="submit"
-    className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 focus:outline-none"
-  >
-    Create Course
-  </button>
-</div>
+          <button
+            type="submit"
+            className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 focus:outline-none"
+          >
+            Create Course
+          </button>
+        </div>
 
       </form>
     </div>
