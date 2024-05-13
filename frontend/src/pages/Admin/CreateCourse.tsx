@@ -10,7 +10,8 @@ import { useState } from "react";
 import axios from "axios";
 import { initializeApp } from "firebase/app";
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
-
+import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 // Initialize Firebase
 const firebaseConfig = {
   apiKey: "AIzaSyAelJ7dlq9btLTsRbGRQKj8p1XRrlo8cVo",
@@ -27,6 +28,7 @@ const app = initializeApp(firebaseConfig);
 const CreateCourse = () => {
   const { user } = useContext(UserContext);
   const userID = user?.id;
+  const navigate = useNavigate();
 
   const initialValues = {
     name: "",
@@ -81,6 +83,21 @@ const CreateCourse = () => {
         }
       );
       console.log(response.data); // Handle the response as needed
+
+      //add sweet alert 2
+      Swal.fire({
+        icon: 'success',
+        title: 'Course Created Successfully',
+        showConfirmButton: false,
+        timer: 1500
+      })
+
+      //nvaigate to course management page after 2 sec
+      setTimeout(() => {
+        navigate("/admin/course-management");
+      }, 2000);
+
+
     } catch (error) {
       console.error(error);
     }

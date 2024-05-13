@@ -53,13 +53,13 @@ export default function MyCourses() {
       <Flex direction="column" width="80%" p="20px" m="auto">
         <Carousel slidesToShow={4}>
           {courses.map((course) => (
-            <div key={course._id}>
+            <div key={course?._id}>
               <Card
-                _id={course._id}
-                name={course.name}
-                description={course.description}
-                price={course.price}
-                img={course.img}
+                _id={course?._id}
+                name={course?.name}
+                description={course?.description}
+                price={course?.price}
+                img={course?.img}
               />
             </div>
           ))}

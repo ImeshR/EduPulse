@@ -210,6 +210,7 @@ const getUserEnrolledCourses = async (userId) => {
   return {
     data: courses,
   };
+
 };
 
 //get all user completed courses
