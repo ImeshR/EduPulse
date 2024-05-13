@@ -190,6 +190,46 @@ const cancelEnrollment = async (courseId, userId) => {
   }
 };
 
+//get user enrolled courses
+const getUserEnrolledCourses = async (userId) => {
+  //find all enrollments for the user
+  const userEnrollments = await UserEnrollment.find({
+    userId,
+    completed: false,
+  });
+
+  //find all courses for the enrollments
+  const courses = [];
+  for (let i = 0; i < userEnrollments.length; i++) {
+    const course = await getCourseById(userEnrollments[i].courseId);
+    courses.push(course.data);
+  }
+
+  return {
+    data: courses,
+  };
+};
+
+//get all user completed courses
+const getUserEnrolledCompletedCourses = async (userId) => {
+  //find all enrollments for the user
+  const userEnrollments = await UserEnrollment.find({
+    userId,
+    completed: true,
+  });
+
+  //find all courses for the enrollments
+  const courses = [];
+  for (let i = 0; i < userEnrollments.length; i++) {
+    const course = await getCourseById(userEnrollments[i].courseId);
+    courses.push(course.data);
+  }
+
+  return {
+    data: courses,
+  };
+};
+
 export {
   createCourse,
   updateCourse,
@@ -198,4 +238,6 @@ export {
   deleteCourse,
   enrollUserToCourse,
   cancelEnrollment,
+  getUserEnrolledCourses,
+  getUserEnrolledCompletedCourses,
 };

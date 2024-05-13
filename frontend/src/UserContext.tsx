@@ -19,7 +19,7 @@ const UserContext = createContext<UserContextType>({
   setUserData: () => { },
 });
 
-const UserProvider: React.FC = ({ children }) => {
+const UserProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [user, setUser] = useState<User | null>(null);
 
   const setUserData = (userData: User) => {
