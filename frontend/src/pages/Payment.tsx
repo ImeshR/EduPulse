@@ -1,9 +1,49 @@
 import React from 'react'
+import { useParams } from 'react-router-dom';
+import { useContext } from 'react';
+import { UserContext } from '../UserContext';
+import Swal from 'sweetalert2';
 
 export default function Payment() {
+  const { id } = useParams<{ id: string }>();
+  const { user } = useContext(UserContext);
+
+  const handlePayment = async (event: React.FormEvent) => {
+    event.preventDefault();
+
+    try {
+      const response = await fetch('http://localhost:7070/api/courseManagement/enroll', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${localStorage.getItem("token")}`
+        },
+        body: JSON.stringify({
+          courseId: id,
+          userId: user?.id,
+        }),
+      });
+
+      if (response.ok) {
+        // Show success alert if the request is successful
+        Swal.fire('Success', 'Course enrolled successfully!', 'success');
+      } else {
+        // Show error alert if there's an issue with the request
+        Swal.fire('Error', 'Failed to enroll in the course. Please try again later.', 'error');
+      }
+    } catch (error) {
+      console.error('Error enrolling in course:', error);
+      // Show error alert if there's an unexpected error
+      Swal.fire('Error', 'An unexpected error occurred. Please try again later.', 'error');
+    }
+  };
+
+
+
+
     return (
         <div className="">
-          <form className="flex py-16 justify-center max-w-3xl mx-auto">
+          <form className="flex py-16 justify-center max-w-3xl mx-auto" onSubmit={handlePayment}>
             <div className="flex-2 flex flex-col">
               <div className="border border-gray-300 p-4">
                 <h1 className="font-bold text-lg">Billing Address</h1>

@@ -94,7 +94,10 @@ const getAllCourses = async () => {
 //get course by id
 const getCourseById = async (id) => {
   try {
-    const course = await Course.findById(id);
+    const course = await Course.findById(id).populate(
+      "createdBy",
+      "firstName lastName email"
+    );
     return {
       data: course,
     };

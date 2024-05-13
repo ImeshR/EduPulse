@@ -2,7 +2,11 @@ import React, { createContext, useState, useEffect } from 'react';
 import { jwtDecode } from 'jwt-decode'; // Corrected import statement
 
 interface User {
-  // Define your user properties here
+  email: string;
+  firstName: string;
+  id: string;
+  lastName: string;
+  role: string;
 }
 
 interface UserContextType {
@@ -12,7 +16,7 @@ interface UserContextType {
 
 const UserContext = createContext<UserContextType>({
   user: null,
-  setUserData: () => {},
+  setUserData: () => { },
 });
 
 const UserProvider: React.FC = ({ children }) => {

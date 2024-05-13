@@ -4,15 +4,16 @@ import { Box, Image, Text } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 
 
-const CourseAbsolute = ({ props }) => {
-  const { onOpen, price, img } = props;
+const CourseAbsolute = (props: { onOpen: () => void; price: number; img: string; _id: string }) => {
+  const { onOpen, price, img, _id } = props;
 
   function handlePayment() {
     onOpen();
+    console.log("Payment clicked", _id);
   }
 
   return (
-    <div className="xl:border text-white bg-[#ffffff] xl:text-black xl:border-white xl:max-w-[380px] xl:shadow-2xl shadow-neutral-800  ">
+    <div className="xl:border text-white bg-[#ffffff] xl:text-black xl:border-white  xl:shadow-2xl shadow-neutral-800  md:min-w-[300px] ">
       <div>
         <div>
           <Image src={img} />
@@ -21,7 +22,7 @@ const CourseAbsolute = ({ props }) => {
           <div className={`cursor-pointer text-center w-full border-b-[1px]`}>
             Personal
           </div>
-          
+
         </div>
       </div>
       <div className="px-[24px]">
@@ -60,19 +61,19 @@ const CourseAbsolute = ({ props }) => {
           <p className="text-xs">left at this price!</p>
         </div>
         <Box>
-            <Text>{}</Text>
+          <Text>{ }</Text>
         </Box>
         <div className="border-2 w-full text-center py-[7px] bg-blue-400 hover:bg-blue-500 text-white text-sm font-bold">
-        <Link to ='/payment'
-          onClick={handlePayment}
-          className=" "
-        >
-          Buy this course
-        </Link>
+          <Link 
+            to={`/payment/${_id}`} 
+            target="_blank"
+           onClick={handlePayment}>
+            Buy this course
+          </Link>
         </div>
 
         <div className="items-center text-[10px] space-y-1 w-full justify-center flex flex-col py-2">
-          
+
           <p>Full Lifetime Access</p>
         </div>
 
@@ -80,7 +81,7 @@ const CourseAbsolute = ({ props }) => {
           <div>
             <Link to=''>share</Link>
           </div>
-     
+
         </div>
       </div>
     </div>

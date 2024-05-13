@@ -1,44 +1,52 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Box, Heading } from "@chakra-ui/react";
 import SingleAbsolute from "./CourseAbsolute";
 import { useParams } from "react-router-dom";
 
 const CoursePage = () => {
-  // Example data, replace with actual data fetching
   const { id } = useParams<{ id: string }>();
-  const courseData = {
-    _id: id,
-    name: "React Course",
-    category: "Web Development",
-    description: "Learn React for building modern web applications Learn React for building modern web applications Learn React for building modern web applications Learn React for building modern web applications Learn React for building modern web applications.",
-    img: "/react.png",
-    summary: [
-      "Build enterprise level Node applications and deploy to the cloud (AWS)",
-      "Work with real life data and SpaceX API to build a NASA launch system, discover new planets that may contain life + other projects",
-      "Become the top 10% Node Developer. Learn REALLY advanced topics!",
-      "Learn to build secure and performant, large scale applications like a senior backend developer",
-      "Authentication, File I/O, Databases (SQL, MongoDB), Express Framework, Sockets, plus many other important topics a backend developer should know",
-      "Focus on security best practices throughout the course so you can be confident with your deployments"
-    ],
-    price: 100,
-    author: "John Doe",
-    rating: 4.8,
-    ratingsCount: 12866,
-    studentsCount: 69107,
-    duration: "16hr",
-    language: "English",
-    autoLanguages: ["English", "Arabic"],
-    moreLanguagesCount: 12,
-  };
+  const [courseData, setCourseData] = useState<any>({});
+  const [loading, setLoading] = useState<boolean>(true);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch(`http://localhost:7070/api/courseManagement/${id}`,
+          {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
+          }
+        );
+        const data = await response.json();
+        setCourseData(data.data);
+        setLoading(false);
+      } catch (error) {
+        console.error("Error fetching course data:", error);
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, [id]);
+
+  if (loading) {
+    return <div>Loading...</div>; // Display loading state
+  }
 
   const props = {
-    onOpen: () => { }, // Placeholder function
+    onOpen: () => {}, // Placeholder function
     price: courseData.price,
     img: courseData.img,
+    _id: courseData._id,
   };
 
+  console.log(courseData._id);
+
   return (
-    <div  className="bg-blue-50">
+    <div className="bg-blue-50">
       <div className="w-full flex justify-center items-center flex-col">
         <div className="w-full bg-neutral-800 flex justify-center p-5">
           <div
@@ -47,12 +55,7 @@ const CoursePage = () => {
           >
             <div className="xl:flex xl:space-x-4">
               <Box className="my-8">
-                <Box
-                  className="outerBox"
-                  color="white"
-                  width="100%"
-                  fontFamily="sans-serif"
-                >
+                <Box className="outerBox" color="white" width="100%" fontFamily="sans-serif">
                   <Box className="space-y-2">
                     <Box className="title" fontWeight="bold">
                       <Heading as="h3" fontSize="2rem">
@@ -65,11 +68,11 @@ const CoursePage = () => {
                     </Box>
 
                     <Box className="rating space-x-2" display="flex" fontWeight="5px">
-                      <Box className="text-yellow-300 text-xs">{courseData.rating}</Box>
+                      <Box className="text-yellow-300 text-xs">3.8</Box>
                       <Box className="text-[11px]">⭐⭐⭐⭐</Box>
                       <Box className="flex text-[12px] space-x-2">
-                        <Box className="text-blue-500">({courseData.ratingsCount} ratings)</Box>
-                        <Box>{courseData.studentsCount} students</Box>
+                        <Box className="text-blue-500">180 ratings</Box>
+                        <Box>200 students</Box>
                       </Box>
                     </Box>
 
@@ -78,31 +81,27 @@ const CoursePage = () => {
                         <p>Created by</p>
                       </Box>
                       <Box className="text-[12px] underline text-blue-500">
-                        {courseData.author}
+                        {courseData.createdBy.firstName} {courseData.createdBy.lastName}
                       </Box>
                     </Box> 
 
                     <Box className="text-[12px]  space-x-4" display="flex">
-                      <Box>🌗 Course Duration {courseData.duration}</Box>
+                      <Box>🌗 Course Duration {courseData.duration} min</Box>
                       <Box>🌐 {courseData.language}</Box>
-                      <Box display="flex">
+                      {/* <Box display="flex">
                         ⌨️ {courseData.autoLanguages.join("[Auto], ")}{" , "}
                         <Box color="#a435f0">{courseData.moreLanguagesCount} more</Box>
-                      </Box>
+                      </Box> */}
                     </Box>
                   </Box>
                 </Box>
               </Box>
-              <div className="mt-6  mb-20 z-50">
-                <SingleAbsolute props={props} />
+              <div className="mt-6 mb-20 z-50">
+                <SingleAbsolute {...props} />
               </div>
             </div>
           </div>
         </div>
-
-      
-       
-
 
         {/* What you learn component*/}
 
@@ -113,8 +112,8 @@ const CoursePage = () => {
               <div className="py-2">
                 <h3 className="text-lg font-bold pb-4">What you'll learn</h3>
               </div>
-              <div className="grid font-semibold text-slate-700 grid-cols-1 sm:grid-cols-2 gap-y-1.5">
-                {courseData.summary.map((item, index) => (
+              <div className="grid font-semibold text-slate-700 grid-cols-1 sm:grid-cols-2 gap-y-1.5 md:min-w-[500px]">
+                {courseData.summary.map((item: string, index: number) => (
                   <div key={index} className="flex items-center space-x-4">
                     <div className="flex items-center space-x-2">
                       <div className="text-[12px]">📚</div>
@@ -125,37 +124,27 @@ const CoursePage = () => {
               </div>
 
               <div className="py-2 items-start">
-              <h3 className="text-lg font-bold pb-2 mt-4">Course Details</h3>
-            </div>
-          <div className="flex flex-col  space-y-2">
-              <div className="flex items-center space-x-1">
-                <div className="text-[12px] font-semibold">👨‍💻 Author:</div>
-                <div className="text-[12px]">{courseData.author}</div>
+                <h3 className="text-lg font-bold pb-2 mt-4">Course Details</h3>
               </div>
-              <div className="flex items-center space-x-1">
-                <div className="text-[12px] font-semibold">🖊️ Title:</div>
-                <div className="text-[12px]">{courseData.name}</div>
+              <div className="flex flex-col space-y-2">
+                <div className="flex items-center space-x-1">
+                  <div className="text-[12px] font-semibold">👨‍💻 Author:</div>
+                  <div className="text-[12px]">{courseData.createdBy.firstName} {courseData.createdBy.lastName}</div>
+                </div>
+                <div className="flex items-center space-x-1">
+                  <div className="text-[12px] font-semibold">🖊️ Title:</div>
+                  <div className="text-[12px]">{courseData.name}</div>
+                </div>
+                <div className="flex items-center space-x-1">
+                  <div className="text-[12px] font-semibold">🕔 Last updated:</div>
+                  <div className="text-[12px]">{courseData.duration}</div>
+                </div>
               </div>
-              <div className="flex items-center space-x-1">
-                <div className="text-[12px] font-semibold">🕔 Last updated:</div>
-                <div className="text-[12px]">{courseData.duration}</div>
-             </div>
-            </div>
 
             </div>
           </div>
         </div>
 
-        
-
-
-
-      
-
-        <Box mt="40px"></Box>
-
-        <div></div>
-        <Box></Box>
       </div>
     </div>
   );
