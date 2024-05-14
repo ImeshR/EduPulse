@@ -24,7 +24,7 @@ const UpdatePaymentData = ({ userId, authToken, onClose }) => {
     } else {
       try {
         const response = await fetch(
-          `http://localhost:4040/api/paymentMangement/update-card`,
+          `http://localhost:7072/api/paymentMangement/update-card`,
           {
             method: "POST",
             headers: {

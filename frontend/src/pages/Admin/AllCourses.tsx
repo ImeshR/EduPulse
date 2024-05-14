@@ -34,7 +34,7 @@ const dummyData = [
     description: "Become proficient in AWS cloud services.",
     course: "AWS",
     img: "/aws.png",
-    price: 3000,
+    price: 7073,
     Author: "husan santo",
 
 
@@ -45,7 +45,7 @@ const dummyData = [
     category: "Web Development",
     description: "Learn HTML for building web pages.",
     img: "/html.png",
-    price: 3000,
+    price: 7073,
     Author:"kamal narayan"
 
   },

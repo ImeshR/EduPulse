@@ -20,7 +20,7 @@ export default function Swiper() {
   useEffect(() => {
     async function fetchCourses() {
       try {
-        const response = await fetch("http://localhost:5060/api/courseManagement/getAll", {
+        const response = await fetch("http://localhost:7071/api/courseManagement/getAll", {
           method: "GET",
           headers: {
             "Content-Type": "application/json",

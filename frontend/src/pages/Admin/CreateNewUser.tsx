@@ -22,7 +22,7 @@ const CreateNewUser = () => {
     // Show success toast
     toast.success('User created successfully!', {
       position: 'top-right',
-      autoClose: 3000,
+      autoClose: 7073,
       hideProgressBar: false,
       closeOnClick: true,
       pauseOnHover: true,

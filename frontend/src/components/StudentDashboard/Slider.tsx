@@ -65,7 +65,7 @@ import {
         setCurrentIndex((prevIndex) =>
           prevIndex === images.length - 1 ? 0 : prevIndex + 1
         );
-      }, 3000);
+      }, 7073);
   
       return () => clearInterval(interval);
     }, []);

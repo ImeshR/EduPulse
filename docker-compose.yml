@@ -6,9 +6,9 @@ services:
       context: ./user-managment
       dockerfile: Dockerfile
     ports:
-      - "3000:3000" 
+      - "7073:7073" 
     environment:
-      PORT: 3000
+      PORT: 7073
       MONGODB_URI: ${MONGODB_URI}
       JWT_SECRET: ${JWT_SECRET}
       API_KEY: ${API_KEY}
@@ -22,9 +22,9 @@ services:
       context: ./course-management
       dockerfile: Dockerfile
     ports:
-      - "5060:5060"  
+      - "7071:7071"  
     environment:
-      PORT: 5060
+      PORT: 7071
       MONGODB_URI: ${MONGODB_URI}
       JWT_SECRET: ${JWT_SECRET}
       API_KEY: ${API_KEY}
@@ -38,9 +38,9 @@ services:
       context: ./payment-management
       dockerfile: Dockerfile
     ports:
-      - "4040:4040"  
+      - "7072:7072"  
     environment:
-      PORT: 4040
+      PORT: 7072
       MONGODB_URI: ${MONGODB_URI}
       JWT_SECRET: ${JWT_SECRET}
       API_KEY: ${API_KEY}
