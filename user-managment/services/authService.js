@@ -108,7 +108,8 @@ const loginUser = async (email, password) => {
         role: user.role,
       },
       jwtSecret,
-      { expiresIn: "3h" }
+      //expire in 1 day
+      { expiresIn: "1d" }
     );
     return token;
   } catch (error) {
