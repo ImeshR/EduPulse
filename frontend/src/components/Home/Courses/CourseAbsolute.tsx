@@ -65,7 +65,7 @@ const CourseAbsolute = (props: { onOpen: () => void; price: number; img: string;
         </Box>
         <div className="border-2 w-full text-center py-[7px] bg-blue-400 hover:bg-blue-500 text-white text-sm font-bold">
           <Link 
-            to={`/payment/${_id}`} 
+            to={`/payment/${_id}/${price}`} 
             target="_blank"
            onClick={handlePayment}>
             Buy this course

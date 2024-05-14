@@ -5,7 +5,7 @@ import { UserContext } from '../UserContext';
 import Swal from 'sweetalert2';
 
 export default function Payment() {
-  const { id } = useParams<{ id: string }>();
+  const { id , price } = useParams<{ id: string }>();
   const { user } = useContext(UserContext);
   const navigate = useNavigate();
   
@@ -23,7 +23,7 @@ export default function Payment() {
         },
         body: JSON.stringify({
           userId: user?.id,
-          amount: 200, // You may need to dynamically set the amount based on your requirements
+          amount: price,
           courseId: id,
         }),
       });
