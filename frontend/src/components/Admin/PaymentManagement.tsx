@@ -31,6 +31,16 @@ export default function PaymentManagement() {
           
         </div>
         </Link>
+
+        {/* Payment Refund card */}
+        <Link to="/admin/payment-refund">
+        <div className="w-96 h-52 shadow-2xl bg-blue-50 rounded-lg  p-6 flex flex-col items-center justify-center transform transition-transform hover:scale-105">
+          <FaPlusCircle className="text-4xl text-green-500 mb-4" />
+          <h2 className="text-xl font-bold">Refund Payment</h2>
+          <p className="text-lg text-gray-600 mt-2">Refund payment to user</p>
+
+          </div>
+        </Link>
       </div>
     </div>
   )

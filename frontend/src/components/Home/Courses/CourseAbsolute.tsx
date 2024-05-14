@@ -13,7 +13,7 @@ const CourseAbsolute = (props: { onOpen: () => void; price: number; img: string;
   }
 
   return (
-    <div className="xl:border text-white bg-[#ffffff] xl:text-black xl:border-white  xl:shadow-2xl shadow-neutral-800  md:min-w-[300px] ">
+    <div className=" min-h-screen xl:border text-white bg-[#ffffff] xl:text-black xl:border-white  xl:shadow-2xl shadow-neutral-800  md:min-w-[300px] ">
       <div>
         <div>
           <Image src={img} />

@@ -14,8 +14,7 @@ function HeaderPrimary() {
       window.location.href = `/search-results?search=${searchQuery}`;
     }
   };
-
-  console.log(user);
+ 
 
 
 

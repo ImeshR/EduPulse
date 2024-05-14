@@ -20,7 +20,7 @@ export default function CreatorCourseManage() {
       <div className="flex justify-center mt-10 font-mono space-x-6">
         
         {/* Create New Course Card */}
-        <Link to="/admin/create-course">
+        <Link to="/creator/create-new-course">
         <div className="w-96 h-52 shadow-2xl bg-blue-50 rounded-lg  p-6 flex flex-col items-center justify-center transform transition-transform hover:scale-105">
           <FaPlusCircle className="text-4xl text-blue-500 mb-4" />
           <h2 className="text-xl font-bold">Create New Course</h2>

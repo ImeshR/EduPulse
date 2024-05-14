@@ -12,6 +12,7 @@ import CreateCourse from './CreateCourse';
 import AllPaymentData from './AllPaymentData';
 import ViewStudentFeedback from './ViewStudentFeedback';
 import ViewAllCreatorFeedBack from './ViewAllCreatorFeedBack';
+import PaymentRefund from './PaymentRefund';
 
 
 const AdminDashboard = () => {
@@ -34,6 +35,8 @@ const AdminDashboard = () => {
           <Route path="all-payment-data" element={<AllPaymentData />} />
           <Route path="view-student-feedback" element={<ViewStudentFeedback />} />
           <Route path="view-creator-feedback" element={<ViewAllCreatorFeedBack />} />
+          <Route path="payment-refund" element={<PaymentRefund />} />
+          
 
         </Routes>
       </div>

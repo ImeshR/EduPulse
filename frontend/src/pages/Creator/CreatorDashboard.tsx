@@ -4,6 +4,7 @@ import CreatorSideBar from '../../components/Creator/CreatorSideBar';
 import CreatorCourseManage from '../../components/Creator/CreatorCourseManage';
 import CreatorMyCourses from '../Creator/CreatorMyCourses';
 import CreatorPaymentManage from '../../components/Creator/CreatorPaymentManage';
+import CcreateNewCourse from './CcreateNewCourse';
 
 
 
@@ -18,6 +19,7 @@ const CreatorDashboard = () => {
             <Route path="/" element={<Navigate to="creator-course-management" />} />
             <Route path="creator-my-courses" element={<CreatorMyCourses />} />
             <Route path="creator-payment-management" element={<CreatorPaymentManage />} />
+            <Route path="create-new-course" element={<CcreateNewCourse />} />
 
         
         </Routes>

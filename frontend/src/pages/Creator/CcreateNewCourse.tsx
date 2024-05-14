@@ -28,7 +28,7 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 
-const CreateCourse = () => {
+const CcreateNewCourse = () => {
   const { user } = useContext(UserContext);
   const userID = user?.id;
   const navigate = useNavigate();
@@ -353,4 +353,4 @@ const CreateCourse = () => {
   );
 };
 
-export default CreateCourse;
+export default CcreateNewCourse;

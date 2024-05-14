@@ -46,8 +46,8 @@ const CoursePage = () => {
   console.log(courseData._id);
 
   return (
-    <div className="bg-blue-50">
-      <div className="w-full flex justify-center items-center flex-col">
+    <div className="bg-blue-50 min-h-screen">
+      <div className="w-full flex justify-center  items-center flex-col">
         <div className="w-full bg-neutral-800 flex justify-center p-5">
           <div
             style={{ paddingTop: "10px" }}
@@ -105,7 +105,7 @@ const CoursePage = () => {
 
         {/* What you learn component*/}
 
-        <div className="xl:mr-24 mt-10">
+        <div className="xl:mr-24 mt-10 min-h-screen">
           <div className="max-w-[598px] xl:mr-96">
             <div className="border my-5 py-5 max-w-[598px] p-4 shadow-md border-slate-100 text-black bg-white">
 

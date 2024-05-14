@@ -14,6 +14,7 @@ import AllCourses from './pages/StudentDashboard/AllCourses';
 import SearchResults from './pages/StudentDashboard/SearchResults';
 import UserProfile from './pages/UserProfile';
 
+
 import AdminDashboard from './pages/Admin/AdminDashboard';
 import CreatorDashboard from './pages/Creator/CreatorDashboard';
 import { UserProvider } from './UserContext';
@@ -37,6 +38,7 @@ function App() {
               <Route path="/all-courses" element={<AllCourses />} />
               <Route path="/search-results" element={<SearchResults />} />
               <Route path="/user-profile" element={<UserProfile />} />
+              
 
               <Route path="/student-dashboard" element={<StudentDashboard />} />
               <Route path="/admin/*" element={<AdminDashboard />} />
