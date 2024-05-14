@@ -15,7 +15,7 @@ export default function Payment() {
 
     try {
       // Request to save transaction
-      const paymentResponse = await fetch('http://localhost:9090/api/paymentMangement/saveTansaction', {
+      const paymentResponse = await fetch('http://localhost:4040/api/paymentMangement/saveTansaction', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -39,7 +39,7 @@ export default function Payment() {
       Swal.fire('Success', 'Payment successful! Proceeding to enroll in the course...', 'success');
 
       // Request to enroll in the course
-      const enrollResponse = await fetch('http://localhost:7070/api/courseManagement/enroll', {
+      const enrollResponse = await fetch('http://localhost:5060/api/courseManagement/enroll', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

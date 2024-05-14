@@ -10,7 +10,7 @@ const ViewPaymentData = ({ userId, authToken }) => {
       setLoading(true);
       try {
         const response = await fetch(
-          'http://localhost:9090/api/paymentMangement/get-card',
+          'http://localhost:4040/api/paymentMangement/get-card',
           {
             method: 'GET',
             headers: {

@@ -14,7 +14,7 @@ RUN npm install
 COPY . .
 
 # Expose port
-EXPOSE 9090
+EXPOSE 4040
 
 # Command to run the server
 CMD ["npm", "start"]

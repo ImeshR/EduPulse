@@ -76,7 +76,7 @@ const CcreateNewCourse = () => {
       values.img = imageLink;
       // Send the form data to the backend API
       const response = await axios.post(
-        "http://localhost:7070/api/courseManagement/create",
+        "http://localhost:5060/api/courseManagement/create",
         values,
         {
           headers: {

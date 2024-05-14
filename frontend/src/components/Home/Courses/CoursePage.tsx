@@ -11,7 +11,7 @@ const CoursePage = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch(`http://localhost:7070/api/courseManagement/${id}`,
+        const response = await fetch(`http://localhost:5060/api/courseManagement/${id}`,
           {
             method: "GET",
             headers: {

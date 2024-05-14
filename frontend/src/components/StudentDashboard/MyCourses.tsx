@@ -25,7 +25,7 @@ export default function MyCourses() {
   useEffect(() => {
     async function fetchCourses() {
       try {
-        const response = await fetch(`http://localhost:7070/api/courseManagement/enrolledCourses/663fc86076fc281a8476bf90`, {
+        const response = await fetch(`http://localhost:5060/api/courseManagement/enrolledCourses/663fc86076fc281a8476bf90`, {
           method: "GET",
           headers: {
             "Content-Type": "application/json",

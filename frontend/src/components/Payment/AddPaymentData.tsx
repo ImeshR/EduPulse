@@ -27,7 +27,7 @@ const AddPaymentDataForm = ({ userId, authToken, onClose }) => {
     } else {
       try {
         const response = await axios.post(
-          'http://localhost:9090/api/paymentMangement/save-card',
+          'http://localhost:4040/api/paymentMangement/save-card',
           {
             token: token.id,
             userId,

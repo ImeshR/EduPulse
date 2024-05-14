@@ -20,11 +20,11 @@ export default function Swiper() {
   useEffect(() => {
     async function fetchCourses() {
       try {
-        const response = await fetch("http://localhost:7070/api/courseManagement/getAll", {
+        const response = await fetch("http://localhost:5060/api/courseManagement/getAll", {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
+            Authorization:` Bearer ${token}`,
           },
         });
         if (!response.ok) {

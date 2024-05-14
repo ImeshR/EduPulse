@@ -17,7 +17,7 @@ export default function SignUp() {
     // Handle signup logic here
     console.log("Signup Details:", { email, password, firstName, lastName, role });
     try {
-      const response = await axios.post("http://localhost:5050/api/auth/register", {
+      const response = await axios.post("http://localhost:3000/api/auth/register", {
         firstName,
         lastName,
         email,
