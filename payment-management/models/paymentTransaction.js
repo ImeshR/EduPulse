@@ -1,4 +1,9 @@
 import mongoose from "mongoose";
+import Course from "./course.js";
+import User from "./Users.js";
+
+const courseModel = mongoose.model("Course", Course.schema);
+const userModel = mongoose.model("User", User.schema);
 
 const paymentTransactionSchema = new mongoose.Schema({
   transactionId: {
@@ -9,7 +14,8 @@ const paymentTransactionSchema = new mongoose.Schema({
     type: String,
   },
   userId: {
-    type: String,
+    type: mongoose.Schema.Types.ObjectId,
+    ref: userModel,
     required: true,
   },
   amount: {
@@ -17,7 +23,8 @@ const paymentTransactionSchema = new mongoose.Schema({
     required: true,
   },
   courseId: {
-    type: String,
+    type: mongoose.Schema.Types.ObjectId,
+    ref: courseModel,
     required: true,
   },
   status: {

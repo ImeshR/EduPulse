@@ -19,7 +19,13 @@ const savePaymentTransaction = async (transaction) => {
 //get all payment transactions
 const getAllPaymentTransactions = async () => {
   try {
-    const paymentTransactions = await PaymentTransaction.find();
+    const paymentTransactions = await PaymentTransaction.find().populate({
+      path: "userId",
+      select: "firstName lastName email",
+    }).populate({
+      path: "courseId",
+      select: "name img price",
+    });
 
     //convert amount to cents
     paymentTransactions.forEach((transaction) => {
@@ -64,8 +70,6 @@ const updatePaymentTransaction = async (id, transaction) => {
     };
   }
 };
-
-
 
 export {
   savePaymentTransaction,
