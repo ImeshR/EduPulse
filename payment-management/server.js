@@ -4,7 +4,7 @@ import dotenv from "dotenv";
 import bodyParser from "body-parser";
 import mongoose from "mongoose";
 import cookieParser from "cookie-parser";
-import { authenticateUser } from "../user-managment/middlewares/authMiddleware.js";
+import { authenticateUser } from "./middlewares/authMiddleware.js";
 import paymentManagementController from "./controllers/paymentControler.js";
 
 

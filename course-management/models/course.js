@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import User from "../../user-managment/models/Users.js";
+import User from "./Users.js";
 
 // Register the User model with Mongoose
 const UserModel = mongoose.model('User', User.schema);
@@ -37,7 +37,7 @@ const courseSchema = new Schema({
   },
   img : {
     type: String,
-    default: "https://www.vecteezy.com/photo/3595752-love-writing-memorizing-love-reading-to-increase-knowledge"
+    required: true,
   },
   price: {
     type: Number,

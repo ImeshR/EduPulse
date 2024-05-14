@@ -23,30 +23,30 @@ function App() {
   return (
     <ChakraProvider>
       <UserProvider>
-      <BrowserRouter>
-        <div className='min-h-screen'> 
-          <HeaderPrimary />
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/sign-up" element={<SignUp />} />
-            <Route path="/sign-in" element={<SignIn />} />
-            <Route path="/course/:id" element={<CoursePage />} />
-            <Route path="/payment/:id" element={<Payment />} />
-            <Route path="/my-course" element={<MyCourse />} />
-            
-            <Route path="/all-courses" element={<AllCourses />} />
-            <Route path="/search-results" element={<SearchResults />} />
-            <Route path="/user-profile" element={<UserProfile />} />
+        <BrowserRouter>
+          <div className='min-h-screen'>
+            <HeaderPrimary />
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/sign-up" element={<SignUp />} />
+              <Route path="/sign-in" element={<SignIn />} />
+              <Route path="/course/:id" element={<CoursePage />} />
+              <Route path="/payment/:id" element={<Payment />} />
+              <Route path="/my-course" element={<MyCourse />} />
 
-            <Route path="/student-dashboard" element={<StudentDashboard />} />
-            <Route path="/admin/*" element={<AdminDashboard />} />
-            <Route path="/creator/*" element={<CreatorDashboard />} />
+              <Route path="/all-courses" element={<AllCourses />} />
+              <Route path="/search-results" element={<SearchResults />} />
+              <Route path="/user-profile" element={<UserProfile />} />
 
-            
-          </Routes>
-          <Footer />
-        </div>
-      </BrowserRouter>
+              <Route path="/student-dashboard" element={<StudentDashboard />} />
+              <Route path="/admin/*" element={<AdminDashboard />} />
+              <Route path="/creator/*" element={<CreatorDashboard />} />
+
+
+            </Routes>
+            <Footer />
+          </div>
+        </BrowserRouter>
       </UserProvider>
     </ChakraProvider>
   );

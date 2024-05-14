@@ -1,8 +1,6 @@
 import Course from "../models/course.js";
 import UserEnrollment from "../models/userEnrollment.js";
-import { createPaymentIntent } from "../../payment-management/services/stripeService.js";
 import { sendEmail } from "./emailService.js";
-import { get } from "http";
 
 //create a course
 const createCourse = async (
@@ -10,6 +8,7 @@ const createCourse = async (
   description,
   summary,
   createdBy,
+  img,
   price,
   duration,
   courseContent
@@ -20,6 +19,7 @@ const createCourse = async (
       description,
       summary,
       createdBy,
+      img,
       price,
       duration,
       courseContent,
@@ -190,6 +190,47 @@ const cancelEnrollment = async (courseId, userId) => {
   }
 };
 
+//get user enrolled courses
+const getUserEnrolledCourses = async (userId) => {
+  //find all enrollments for the user
+  const userEnrollments = await UserEnrollment.find({
+    userId,
+    completed: false,
+  });
+
+  //find all courses for the enrollments
+  const courses = [];
+  for (let i = 0; i < userEnrollments.length; i++) {
+    const course = await getCourseById(userEnrollments[i].courseId);
+    courses.push(course.data);
+  }
+
+  return {
+    data: courses,
+  };
+
+};
+
+//get all user completed courses
+const getUserEnrolledCompletedCourses = async (userId) => {
+  //find all enrollments for the user
+  const userEnrollments = await UserEnrollment.find({
+    userId,
+    completed: true,
+  });
+
+  //find all courses for the enrollments
+  const courses = [];
+  for (let i = 0; i < userEnrollments.length; i++) {
+    const course = await getCourseById(userEnrollments[i].courseId);
+    courses.push(course.data);
+  }
+
+  return {
+    data: courses,
+  };
+};
+
 export {
   createCourse,
   updateCourse,
@@ -198,4 +239,6 @@ export {
   deleteCourse,
   enrollUserToCourse,
   cancelEnrollment,
+  getUserEnrolledCourses,
+  getUserEnrolledCompletedCourses,
 };
