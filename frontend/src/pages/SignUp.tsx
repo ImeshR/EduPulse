@@ -14,7 +14,7 @@ export default function SignUp() {
 
   const handleSignUp = async (e) => {
     e.preventDefault();
-    // Handle signup logic here
+    // Signup Logic
     console.log("Signup Details:", { email, password, firstName, lastName, role });
     try {
       const response = await axios.post("http://localhost:7073/api/auth/register", {
