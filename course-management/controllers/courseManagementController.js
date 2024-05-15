@@ -9,6 +9,9 @@ import {
   cancelEnrollment,
   getUserEnrolledCourses,
   getUserEnrolledCompletedCourses,
+  getUserEnrolledCourse,
+  saveCourseProgress,
+  saveCompletedCourse,
 } from "../services/courseService.js";
 
 const router = express.Router();
@@ -137,6 +140,41 @@ router.get("/completedCourses/:userId", async (req, res) => {
   try {
     const courses = await getUserEnrolledCompletedCourses(req.params.userId);
     res.json(courses);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+//get user enrolled courses by user id and course id
+router.get("/enrolledCourses/:userId/:courseId", async (req, res) => {
+  try {
+    const courses = await getUserEnrolledCourse(
+      req.params.userId,
+      req.params.courseId
+    );
+    res.json(courses);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+//save course progress with user id, course id and step
+router.post("/saveProgress/:userId/:courseId/:step", async (req, res) => {
+  try {
+    const { userId, courseId, step } = req.params;
+    const course = await saveCourseProgress(userId, courseId, step);
+    res.json(course);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+//cpmpleted course
+router.post("/completedCourse/:userId/:courseId", async (req, res) => {
+  try {
+    const { userId, courseId } = req.params;
+    const course = await saveCompletedCourse(userId, courseId);
+    res.json(course);
   } catch (error) {
     res.status(500).json({ error: error.message });
   }

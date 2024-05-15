@@ -208,7 +208,6 @@ const getUserEnrolledCourses = async (userId) => {
   return {
     data: courses,
   };
-
 };
 
 //get all user completed courses
@@ -231,6 +230,96 @@ const getUserEnrolledCompletedCourses = async (userId) => {
   };
 };
 
+//get user enrolled courses by user id and course id
+const getUserEnrolledCourse = async (userId, courseId) => {
+  const userEnrollment = await UserEnrollment.findOne({
+    userId,
+    courseId,
+  }).populate("courseId");
+
+  if (!userEnrollment) {
+    return {
+      message: "User not enrolled to the course",
+    };
+  }
+
+  return userEnrollment;
+};
+
+//save course progress with user id, course id and step
+const saveCourseProgress = async (userId, courseId, step) => {
+  const userEnrollment = await UserEnrollment.findOne({
+    userId,
+    courseId,
+  });
+
+  if (!userEnrollment) {
+    return {
+      message: "User not enrolled to the course",
+    };
+  }
+
+  userEnrollment.step = step;
+  await userEnrollment.save();
+
+  return {
+    message: "Course progress saved successfully",
+    data: userEnrollment,
+  };
+};
+
+//save completed course
+const saveCompletedCourse = async (userId, courseId) => {
+  const userEnrollment = await UserEnrollment.findOne({
+    userId,
+    courseId,
+  }).populate("userId");
+
+  if (!userEnrollment) {
+    return {
+      message: "User not enrolled to the course",
+    };
+  }
+
+  //get user email
+  const userEmail = userEnrollment.userId.email;
+
+  //get course content length
+  const course = await getCourseById(courseId);
+  const courseContentLength = course.data.courseContent.length;
+
+  console.log(courseContentLength);
+
+  userEnrollment.completed = true;
+  userEnrollment.step = courseContentLength;
+
+  await userEnrollment.save();
+  console.log(course.data.name);
+
+  try {
+    //send email
+    await sendEmail(
+      userEmail,
+      "Course Completion",
+      `You have successfully completed the course ${course.data.name}`,
+      `<p>
+    You have successfully completed the course ${course.data.name}. 
+    Congratulations!
+  </p>`
+    );
+  } catch (error) {
+    return {
+      message: "Failed to send email",
+      error: error.message,
+    };
+  }
+
+  return {
+    message: "Course completed successfully",
+    data: userEnrollment,
+  };
+};
+
 export {
   createCourse,
   updateCourse,
@@ -241,4 +330,7 @@ export {
   cancelEnrollment,
   getUserEnrolledCourses,
   getUserEnrolledCompletedCourses,
+  getUserEnrolledCourse,
+  saveCourseProgress,
+  saveCompletedCourse,
 };
