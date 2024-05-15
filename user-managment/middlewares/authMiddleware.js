@@ -20,7 +20,7 @@ export const authenticateUser = (req, res, next) => {
   // Remove "Bearer " prefix from token
   const tokenString = token.substring(7);
 
-  // Verify token
+  // Token Verification
   jwt.verify(tokenString, jwtSecret, (err, user) => {
     if (err) {
       console.error(err);

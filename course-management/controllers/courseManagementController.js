@@ -169,7 +169,7 @@ router.post("/saveProgress/:userId/:courseId/:step", async (req, res) => {
   }
 });
 
-//cpmpleted course
+//completed course
 router.post("/completedCourse/:userId/:courseId", async (req, res) => {
   try {
     const { userId, courseId } = req.params;
