@@ -28,7 +28,7 @@ export default function SignUp() {
       console.log("Signup Response:", response);
 
       if (response.status === 201) {
-        //sweetalert2 alert
+        //sweet alert
         Swal.fire({
           title: "Account Created",
           text: "Your account has been created successfully!",
