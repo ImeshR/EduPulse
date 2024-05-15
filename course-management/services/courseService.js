@@ -249,9 +249,9 @@ const getUserEnrolledCourse = async (userId, courseId) => {
 //save course progress with user id, course id and step
 const saveCourseProgress = async (userId, courseId, step) => {
   const userEnrollment = await UserEnrollment.findOne({
-      userId,
-      courseId,
-    });
+    userId,
+    courseId,
+  });
 
   if (!userEnrollment) {
     return {
@@ -266,15 +266,14 @@ const saveCourseProgress = async (userId, courseId, step) => {
     message: "Course progress saved successfully",
     data: userEnrollment,
   };
-}
+};
 
 //save completed course
 const saveCompletedCourse = async (userId, courseId) => {
-  const userEnrollment = await UserEnrollment
-    .findOne({
-      userId,
-      courseId,
-    });
+  const userEnrollment = await UserEnrollment.findOne({
+    userId,
+    courseId,
+  }).populate("userId");
 
   if (!userEnrollment) {
     return {
@@ -282,22 +281,44 @@ const saveCompletedCourse = async (userId, courseId) => {
     };
   }
 
+  //get user email
+  const userEmail = userEnrollment.userId.email;
+
   //get course content length
   const course = await getCourseById(courseId);
   const courseContentLength = course.data.courseContent.length;
 
   console.log(courseContentLength);
- 
+
   userEnrollment.completed = true;
   userEnrollment.step = courseContentLength;
 
   await userEnrollment.save();
+  console.log(course.data.name);
+
+  try {
+    //send email
+    await sendEmail(
+      userEmail,
+      "Course Completion",
+      `You have successfully completed the course ${course.data.name}`,
+      `<p>
+    You have successfully completed the course ${course.data.name}. 
+    Congratulations!
+  </p>`
+    );
+  } catch (error) {
+    return {
+      message: "Failed to send email",
+      error: error.message,
+    };
+  }
 
   return {
     message: "Course completed successfully",
     data: userEnrollment,
   };
-}
+};
 
 export {
   createCourse,
