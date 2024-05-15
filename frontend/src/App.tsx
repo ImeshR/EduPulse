@@ -13,6 +13,7 @@ import StudentDashboard from './pages/StudentDashboard/StudentDashboard';
 import AllCourses from './pages/StudentDashboard/AllCourses';
 import SearchResults from './pages/StudentDashboard/SearchResults';
 import UserProfile from './pages/UserProfile';
+import CourseData from './pages/CourseData';
 
 
 import AdminDashboard from './pages/Admin/AdminDashboard';
@@ -39,7 +40,7 @@ function App() {
               <Route path="/all-courses" element={<AllCourses />} />
               <Route path="/search-results" element={<SearchResults />} />
               <Route path="/user-profile" element={<UserProfile />} />
-              
+              <Route path="/courses/:id" element={<CourseData />} />
 
               <Route path="/student-dashboard" element={<StudentDashboard />} />
               <Route path="/admin/*" element={<AdminDashboard />} />
