@@ -60,7 +60,7 @@ router.post("/save-card", async (req, res) => {
 
 //get card details
 router.get("/get-card", async (req, res) => {
-  const { userId } = req.body;
+  const { userId } = req.query; // Retrieve userId from query parameters
   const response = await getCard(userId);
   res.send(response);
 });

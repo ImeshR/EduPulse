@@ -39,9 +39,13 @@ const AddPaymentDataForm = ({ userId, authToken, onClose }) => {
             },
           }
         );
-        console.log(response.data);
+        if (response.data.message === 'Card saved successfully') {
+          alert('Card saved successfully');
+          onClose();
+        } else {
+          setError('Failed to save card');
+        }
         setLoading(false);
-        onClose();
       } catch (error) {
         console.error(error);
         setError('Failed to save card');
