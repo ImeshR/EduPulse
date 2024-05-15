@@ -14,7 +14,7 @@ export default function SignUp() {
 
   const handleSignUp = async (e) => {
     e.preventDefault();
-    // Handle signup logic here
+    // Signup Logic
     console.log("Signup Details:", { email, password, firstName, lastName, role });
     try {
       const response = await axios.post("http://localhost:7073/api/auth/register", {
@@ -28,7 +28,7 @@ export default function SignUp() {
       console.log("Signup Response:", response);
 
       if (response.status === 201) {
-        //sweetalert2 alert
+        //sweet alert
         Swal.fire({
           title: "Account Created",
           text: "Your account has been created successfully!",
