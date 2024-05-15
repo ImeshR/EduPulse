@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Box, Heading } from "@chakra-ui/react";
-import SingleAbsolute from "./CourseAbsolute";
+import CourseAbsolute from "./CourseAbsolute";
 import { useParams } from "react-router-dom";
 
 const CoursePage = () => {
@@ -41,6 +41,8 @@ const CoursePage = () => {
     price: courseData.price,
     img: courseData.img,
     _id: courseData._id,
+    name: courseData.name,
+    duration: courseData.duration,
   };
 
   console.log(courseData._id);
@@ -97,7 +99,7 @@ const CoursePage = () => {
                 </Box>
               </Box>
               <div className="mt-6 mb-20 z-50">
-                <SingleAbsolute {...props} />
+                <CourseAbsolute {...props} />
               </div>
             </div>
           </div>
