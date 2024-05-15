@@ -18,8 +18,6 @@ const registerUser = async (userData) => {
 
     // Check if user already exists
     const user = await User.findOne({ email: userData.email });
-
-    // If user exists, throw an error
     if (user) {
       throw new Error("User already exists");
     }
@@ -39,7 +37,7 @@ const registerUser = async (userData) => {
     //send email to user
     try {
       const subject = "Registration Successful";
-      const text = `Welcome ${firstName}, you have successfully registered.`;
+      const text = `Welcome ${firstName}, you have successfully registered !.`;
       const html = `
                   <html>
                    <head>
@@ -58,7 +56,7 @@ const registerUser = async (userData) => {
 
     return {
       user: res,
-      message: "User registered successfully",
+      message: "User registered successfully !",
     };
   } catch (error) {
     throw new Error("Failed to register user");

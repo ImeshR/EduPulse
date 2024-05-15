@@ -2,10 +2,15 @@
 import React from "react";
 import { Box, Image, Text } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
+import { UserContext } from "../../../UserContext";
+import { useContext } from "react";
 
 
-const CourseAbsolute = (props: { onOpen: () => void; price: number; img: string; _id: string }) => {
-  const { onOpen, price, img, _id } = props;
+const CourseAbsolute = (props: { onOpen: () => void; price: number; img: string; _id: string}) => {
+  const { user } = useContext(UserContext); // Access user data from UserContext
+  const { onOpen, price, img, _id} = props;
+ 
+  console.log ("userdd", user.id);
 
   function handlePayment() {
     onOpen();
@@ -64,12 +69,14 @@ const CourseAbsolute = (props: { onOpen: () => void; price: number; img: string;
           <Text>{ }</Text>
         </Box>
         <div className="border-2 w-full text-center py-[7px] bg-blue-400 hover:bg-blue-500 text-white text-sm font-bold">
-          <Link 
-            to={`/payment/${_id}/${price}`} 
-            target="_blank"
-           onClick={handlePayment}>
-            Buy this course
-          </Link>
+        <Link 
+  to={`/payment/${_id}/${price}/${user.id}`} 
+  target="_blank"
+  onClick={handlePayment}
+>
+  Buy this course
+</Link>
+
         </div>
 
         <div className="items-center text-[10px] space-y-1 w-full justify-center flex flex-col py-2">

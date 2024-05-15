@@ -1,5 +1,5 @@
 import React, { createContext, useState, useEffect } from 'react';
-import { jwtDecode } from 'jwt-decode'; // Corrected import statement
+import { jwtDecode } from 'jwt-decode'; 
 
 interface User {
   email: string;
@@ -31,7 +31,7 @@ const UserProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => 
 
     if (token) {
       // Decode the token to get user data
-      const decoded = jwtDecode<User>(token); // Use jwtDecode instead of jwt_decode
+      const decoded = jwtDecode<User>(token); 
       // Set user data to state
       setUser(decoded);
     }
