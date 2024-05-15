@@ -1,109 +1,115 @@
-import React, { useState } from 'react';
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { RiGoogleFill, RiFacebookFill } from "react-icons/ri";
+import axios from "axios";
+import Swal from "sweetalert2";
 
-const CreateNewUser = () => {
-  const [formData, setFormData] = useState({
-    email: '',
-    firstName: '',
-    lastName: '',
-    role: '',
-  });
+export default function CreateNewUser() {
+  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [role, setRole] = useState("");
+  const [loading, setLoading] = useState(false); // State to track loading
+  const navigate = useNavigate();
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
-  };
-
-  const handleSubmit = (e) => {
+  const handleSignUp = async (e) => {
     e.preventDefault();
-    // Handle form submission, e.g., send data to backend API
-    console.log('Form submitted:', formData);
-    // Show success toast
-    toast.success('User created successfully!', {
-      position: 'top-right',
-      autoClose: 7073,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-    });
+    try {
+      setLoading(true); // Set loading to true when sign-up process starts
+      const response = await axios.post("http://localhost:7073/api/auth/register", {
+        firstName,
+        lastName,
+        email,
+        password,
+        role,
+      });
+
+      if (response.status === 201) {
+        Swal.fire({
+          title: "Account Created",
+          text: "User  has been created successfully!",
+          icon: "success",
+          confirmButtonText: "Continue",
+        });
+        
+      }
+    } catch (error) {
+      Swal.fire({
+        title: "Error",
+        text: error.response.data.message,
+        icon: "error",
+        confirmButtonText: "Try Again",
+      });
+    } finally {
+      setLoading(false); // Set loading to false when sign-up process finishes
+    }
   };
 
   return (
-    <div className="container mx-auto">
-      <h1 className="text-2xl font-semibold mt-8 mb-4">Create New User</h1>
-      <form onSubmit={handleSubmit} className="max-w-lg mx-auto">
-        <div className="mb-4">
-          <label htmlFor="email" className="block mb-1">Email:</label>
-          <input
-            type="email"
-            id="email"
-            name="email"
-            value={formData.email}
-            onChange={handleChange}
-            placeholder="Enter email"
-            className="w-full px-3 py-2 border rounded shadow-sm focus:outline-none focus:border-blue-500"
-          />
+    <>
+      <div className="login flex justify-center items-center ">
+        <div className="login__content items-center justify-center rounded-lg mt-14 shadow-md p-8 w-[500px]">
+          <p className="text-center text-blue-500 font-bold text-2xl mb-8">Create New User!</p>
+      
+          <form onSubmit={handleSignUp}>
+            <div className="login__inputs flex  space-y-4 flex-col">
+              <select
+                className="mb-2 px-2 py-2 border border-black rounded-md"
+                value={role}
+                onChange={(e) => setRole(e.target.value)}
+                required
+              >
+                <option value="">Select Role</option>
+                <option value="user">Student</option>
+                <option value="creator">Creator</option>
+                <option value="admin">Admin</option>
+              </select>
+              <input
+                type="text"
+                placeholder="First Name"
+                className="mb-2 px-2 py-2 border border-black rounded-md"
+                value={firstName}
+                onChange={(e) => setFirstName(e.target.value)}
+                required
+              />
+              <input
+                type="text"
+                placeholder="Last Name"
+                className="mb-2 px-2 py-2 border border-black rounded-md"
+                value={lastName}
+                onChange={(e) => setLastName(e.target.value)}
+                required
+              />
+              <input
+                type="text"
+                placeholder="Email"
+                className="mb-2 px-2 py-2 border border-black rounded-md"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+              />
+              <input
+                type="password"
+                placeholder="Password"
+                className="mb-4 px-2 py-2 border border-black rounded-md"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+              />
+              <button
+                type="submit"
+                className="bg-blue-300 text-white font-bold py-2 rounded-md relative" // Add relative position
+                disabled={loading} // Disable button when loading
+              >
+                {loading && <div className="loader absolute inset-0 bg-black opacity-50"></div>} {/* Loader effect */}
+                {loading ? 'Loading...' : 'Create New User'} {/* Show loading text when loading */}
+              </button>
+            </div>
+          </form>
+         
         </div>
-        <div className="mb-4">
-          <label htmlFor="firstName" className="block mb-1">First Name:</label>
-          <input
-            type="text"
-            id="firstName"
-            name="firstName"
-            value={formData.firstName}
-            onChange={handleChange}
-            placeholder="Enter first name"
-            className="w-full px-3 py-2 border rounded shadow-sm focus:outline-none focus:border-blue-500"
-          />
-        </div>
-        <div className="mb-4">
-          <label htmlFor="lastName" className="block mb-1">Last Name:</label>
-          <input
-            type="text"
-            id="lastName"
-            name="lastName"
-            value={formData.lastName}
-            onChange={handleChange}
-            placeholder="Enter last name"
-            className="w-full px-3 py-2 border rounded shadow-sm focus:outline-none focus:border-blue-500"
-          />
-        </div>
-        <div className="mb-4">
-          <label htmlFor="role" className="block mb-1">Role:</label>
-          <select
-            id="role"
-            name="role"
-            value={formData.role}
-            onChange={handleChange}
-            className="w-full px-3 py-2 border rounded shadow-sm focus:outline-none focus:border-blue-500"
-          >
-            <option value="">Select role</option>
-            <option value="Admin">Admin</option>
-            <option value="Creator">Creator</option>
-            <option value="Student">Student</option>
-          </select>
-        </div>
-        <div className="mb-4">
-          <label htmlFor="password" className="block mb-1">Password:</label>
-          <input
-            type="password"
-            id="password"
-            name="password"
-            value={formData.password}
-            onChange={handleChange}
-            placeholder="Enter password"
-            className="w-full px-3 py-2 border rounded shadow-sm focus:outline-none focus:border-blue-500"
-          />
-        </div>
-
-        <button type="submit" className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 focus:outline-none">Create User</button>
-        </form>
-      <ToastContainer />
-    </div>
+      </div>
+    </>
   );
-};
-
-export default CreateNewUser;
+}
