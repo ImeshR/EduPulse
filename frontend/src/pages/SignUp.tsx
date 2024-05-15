@@ -10,13 +10,13 @@ export default function SignUp() {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [role, setRole] = useState("");
+  const [loading, setLoading] = useState(false); // State to track loading
   const navigate = useNavigate();
 
   const handleSignUp = async (e) => {
     e.preventDefault();
-    // Signup Logic
-    console.log("Signup Details:", { email, password, firstName, lastName, role });
     try {
+      setLoading(true); // Set loading to true when sign-up process starts
       const response = await axios.post("http://localhost:7073/api/auth/register", {
         firstName,
         lastName,
@@ -25,33 +25,25 @@ export default function SignUp() {
         role,
       });
 
-      console.log("Signup Response:", response);
-
       if (response.status === 201) {
-        //sweet alert
         Swal.fire({
           title: "Account Created",
           text: "Your account has been created successfully!",
           icon: "success",
           confirmButtonText: "Continue",
         });
-
-        // Redirect to login page
         navigate("/sign-in");
-
       }
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    } catch (error: any) {
-      console.log("Signup Error:", error);
-      //sweetalert2 alert
+    } catch (error) {
       Swal.fire({
         title: "Error",
         text: error.response.data.message,
         icon: "error",
         confirmButtonText: "Try Again",
       });
+    } finally {
+      setLoading(false); // Set loading to false when sign-up process finishes
     }
-
   };
 
   return (
@@ -95,7 +87,6 @@ export default function SignUp() {
                 onChange={(e) => setLastName(e.target.value)}
                 required
               />
-
               <input
                 type="text"
                 placeholder="Email"
@@ -114,9 +105,11 @@ export default function SignUp() {
               />
               <button
                 type="submit"
-                className="bg-blue-300 text-white font-bold py-2 rounded-md"
+                className="bg-blue-300 text-white font-bold py-2 rounded-md relative" // Add relative position
+                disabled={loading} // Disable button when loading
               >
-                Sign Up
+                {loading && <div className="loader absolute inset-0 bg-black opacity-50"></div>} {/* Loader effect */}
+                {loading ? 'Loading...' : 'Sign Up'} {/* Show loading text when loading */}
               </button>
             </div>
           </form>

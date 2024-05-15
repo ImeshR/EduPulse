@@ -1,17 +1,19 @@
 import React, { useState } from 'react';
-import { Link , useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { RiGoogleFill, RiFacebookFill } from 'react-icons/ri';
-import Swal from 'sweetalert2';
+import Swal from "sweetalert2";
 import axios from 'axios';
 
 export default function SignIn() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [loading, setLoading] = useState(false); // State to track loading
   const navigate = useNavigate();
 
   const handleSignIn = async (e) => {
     e.preventDefault();
     try {
+      setLoading(true); // Set loading to true when sign-in process starts
       // Send POST request to login endpoint
       const response = await axios.post('http://localhost:7073/api/auth/login', {
         email,
@@ -19,22 +21,25 @@ export default function SignIn() {
       });
       // Display success alert
       Swal.fire({
+        title: 'Logged In',
+        text: 'You have successfully logged in!',
         icon: 'success',
-        title: 'Logged In Successfully!',
-        showConfirmButton: false,
-        timer: 1500,
+        confirmButtonText: 'Continue',
       });
-      
-      //save token in local storage
+
+      // Save token in local storage
       localStorage.setItem('token', response.data.token);
       navigate('/');
     } catch (error) {
       // Display error alert
       Swal.fire({
+        title: 'Error',
+        text: error.response.data.message,
         icon: 'error',
-        title: 'Oops...',
-        text: 'Invalid email or password!',
+        confirmButtonText: 'Try Again',
       });
+    } finally {
+      setLoading(false); // Set loading to false when sign-in process finishes
     }
   };
 
@@ -72,9 +77,11 @@ export default function SignIn() {
               />
               <button
                 type="submit"
-                className="bg-blue-300 text-white font-bold py-2 rounded-md"
+                className="bg-blue-300 text-white font-bold py-2 rounded-md relative" // Add relative position
+                disabled={loading} // Disable button when loading
               >
-                Log In
+                {loading && <div className="loader absolute inset-0 bg-black opacity-50"></div>} {/* Loader effect */}
+                {loading ? 'Loading...' : 'Log In'} {/* Show loading text when loading */}
               </button>
             </div>
           </form>
@@ -86,6 +93,7 @@ export default function SignIn() {
           </div>
         </div>
       </div>
+     
     </>
   );
 }
