@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import { CardElement, useStripe, useElements, Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 import { Button, FormControl, FormLabel } from "@chakra-ui/react";
-
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const publishableKey = 'pk_test_51PEpR3P8dDb7QY7tKrBzy4J2YxgLPMx8sa4GPNpGeuuI3ESshjyW1qXZAx3VHioialpcMMZuTE1kHTL4f5gAuYuf00MRP8Okqi';
 const stripePromise = loadStripe(publishableKey);
@@ -46,15 +47,18 @@ const UpdatePaymentDataForm = ({ userId, authToken, onClose }) => {
 
         const responseData = await response.json(); // Parse response JSON
         if (responseData.message === 'Card details updated successfully') {
-          alert('Card details updated successfully');
+          
+          toast.success('Card details updated successfully');
           onClose();
         } else {
           setError('Failed to save card');
+          toast.error('Failed to save card');
         }
         setLoading(false);
       } catch (error) {
         console.error(error);
         setError('Failed to save card');
+        toast.error('Failed to save card');
         setLoading(false);
       }
 
