@@ -5,15 +5,20 @@ import LatestCourses from '../../components/StudentDashboard/LatestCourses'
 import { Box, Text } from "@chakra-ui/react";
 import LernerOutcomes from '../../components/StudentDashboard/LernerOutcomes';
 import CompletedCourses from '../../components/StudentDashboard/CompletedCourses';
+import { useContext } from 'react';
+import { UserContext } from '../../UserContext';
 
 export default function StudentDashboard() {
+  const { user } = useContext(UserContext);
+
+  console.log(user?.id);
   return (
     <div>
       <div className=' min-h-screen bg-[#ffffff] items-center'>
 
         <Slider />
-        <MyCourses />
-        <CompletedCourses />
+        <MyCourses userId={user?.id} />
+        <CompletedCourses userId={user?.id} />
         <LatestCourses />
         <Box
           border="4px solid"

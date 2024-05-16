@@ -1,11 +1,10 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Flex } from "@chakra-ui/react";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "../../components/Home/Courses/Swiper.css";
 import Card from "../Home/Courses/Card";
 import { Carousel } from "antd";
-import { UserContext } from "../../UserContext";
 
 interface Course {
   _id: string;
@@ -15,17 +14,19 @@ interface Course {
   img: string;
 }
 
-export default function MyCourses() {
+interface CompletedCoursesProps {
+  userId: string | undefined; // Define prop type
+}
+
+
+export default function MyCourses({ userId }: CompletedCoursesProps) {
   const [courses, setCourses] = useState<Course[]>([]);
   const token = localStorage.getItem("token");
-  // const user = localStorage.getItem("userData");
-
-  const { user } = useContext(UserContext);
 
   useEffect(() => {
     async function fetchCourses() {
       try {
-        const response = await fetch(`http://localhost:7071/api/courseManagement/enrolledCourses/663fc86076fc281a8476bf90`, {
+        const response = await fetch(`http://localhost:7071/api/courseManagement/enrolledCourses/${userId}`, {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
@@ -44,7 +45,7 @@ export default function MyCourses() {
     }
 
     fetchCourses();
-  }, [token, user?.id]);
+  }, [token, userId]);
 
   return (
     (courses.length > 0) ? (

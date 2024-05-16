@@ -1,8 +1,7 @@
-import React, { useContext } from "react";
+import React from "react";
 import { Box, Flex, Image, Text } from "@chakra-ui/react";
 import { FaGraduationCap } from "react-icons/fa";
 import { Link } from "react-router-dom";
-import { UserContext } from "../../../UserContext";
 
 type CourseType = {
   _id: string;
@@ -16,9 +15,8 @@ const Card: React.FC<CourseType> = ({ _id, img, name, description, price }) => {
   const miniimg =
     "https://d3njjcbhbojbot.cloudfront.net/api/utilities/v1/imageproxy/https://images.ctfassets.net/wp1lcwdav1p1/60SA8pGxPXMmJf4n7umK1H/ccec31bbe2358210bf8391dcba6cd2f1/umich.png?auto=format%2Ccompress&dpr=1&w=&h=55";
 
-    const { user } = useContext(UserContext);
   return (
-    <Link to={`/my-course/${user?.id}/${_id}`} target="_blank">
+    <Link to={`/course/${_id}`} target="_blank">
       <Flex
         direction="column"
         gap="5px"
