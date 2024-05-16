@@ -3,6 +3,8 @@ import { CardElement, useStripe, useElements, Elements } from '@stripe/react-str
 import { Button, FormControl, FormLabel } from '@chakra-ui/react';
 import { loadStripe } from '@stripe/stripe-js';
 import axios from 'axios';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const publishableKey = 'pk_test_51PEpR3P8dDb7QY7tKrBzy4J2YxgLPMx8sa4GPNpGeuuI3ESshjyW1qXZAx3VHioialpcMMZuTE1kHTL4f5gAuYuf00MRP8Okqi';
 const stripePromise = loadStripe(publishableKey);
@@ -40,21 +42,26 @@ const AddPaymentDataForm = ({ userId, authToken, onClose }) => {
           }
         );
         if (response.data.message === 'Card saved successfully') {
-          alert('Card saved successfully');
+          toast.success('Card saved successfully');
           onClose();
         } else {
           setError('Failed to save card');
+          toast.error('Failed to save card');
+
         }
         setLoading(false);
       } catch (error) {
         console.error(error);
         setError('Failed to save card');
+        toast.error('Failed to save card');
+
         setLoading(false);
       }
     }
   };
 
   return (
+    <div>
     <form onSubmit={handleSubmit}>
       <FormControl>
         <FormLabel>Card Details</FormLabel>
@@ -70,7 +77,10 @@ const AddPaymentDataForm = ({ userId, authToken, onClose }) => {
       >
         Save Card
       </Button>
+      
     </form>
+   
+    </div>
   );
 };
 
@@ -78,6 +88,7 @@ const AddPaymentData = ({ userId, authToken, onClose }) => {
   return (
     <Elements stripe={stripePromise}>
       <AddPaymentDataForm userId={userId} authToken={authToken} onClose={onClose} />
+      
     </Elements>
   );
 };

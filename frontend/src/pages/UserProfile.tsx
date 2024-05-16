@@ -15,6 +15,8 @@ import StripeProviderWrapper from '../components/Payment/StripeProviderWrapper';
 import AddPaymentData from '../components/Payment/AddPaymentData';
 import ViewPaymentData from '../components/Payment/ViewPaymentData';
 import UpdatePaymentData from '../components/Payment/UpdatePaymentData';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function UserProfile() {
   const { user } = useContext(UserContext); // Access user data from UserContext
@@ -120,6 +122,7 @@ export default function UserProfile() {
           </ModalFooter>
         </ModalContent>
       </Modal>
+      <ToastContainer />
     </div>
   );
 }

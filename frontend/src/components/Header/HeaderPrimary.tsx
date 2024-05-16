@@ -3,11 +3,14 @@ import { RiShoppingCartLine, RiSearchLine } from "react-icons/ri";
 import { Link } from "react-router-dom";
 import { UserContext } from "../../UserContext";
 import UserMenu from "./UserMenu";
+import { useNavigate } from 'react-router-dom';
+
 
 function HeaderPrimary() {
   const [searchQuery, setSearchQuery] = useState("");
   const { user, setUserData } = useContext(UserContext); // Access user data and logout function from UserContext
 
+  const navigate = useNavigate();
   const handleSearch = (e) => {
     if (e.key === "Enter") {
       window.location.href = `/search-results?search=${searchQuery}`;
@@ -19,7 +22,11 @@ function HeaderPrimary() {
     setUserData(null);
     localStorage.removeItem('token');
     // Refresh the page to reflect changes
+    
+    
+    navigate('/sign-in');
     window.location.reload();
+
   };
 
   return (
