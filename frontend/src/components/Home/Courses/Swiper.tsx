@@ -3,7 +3,7 @@ import { Flex } from "@chakra-ui/react";
 import { Carousel } from "antd";
 // import "antd/dist/antd.css";
 import "./Swiper.css";
-import Card from "./Card";
+import Card from "../../../components/Home/Card";
 
 interface Course {
   _id: string;

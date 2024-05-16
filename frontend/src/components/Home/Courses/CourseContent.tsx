@@ -6,12 +6,18 @@ import Confetti from "react-confetti"; // Import Confetti
 import { UserContext } from "../../../UserContext";
 
 const CourseContent = ({ course }) => {
-  const [currentContentIndex, setCurrentContentIndex] = useState(0);
+  const [currentContentIndex, setCurrentContentIndex] = useState(course?.step || 0); // Initialize current step with course.currentStep or 0
   const [stepCompleted, setStepCompleted] = useState(false);
-  const [courseCompleted, setCourseCompleted] = useState(false); // Track course completion
+  const [courseCompleted, setCourseCompleted] = useState(false); 
   const { courseId } = course;
   const { courseContent, name } = courseId;
   const { user } = useContext(UserContext);
+
+
+  //get the current step index from the course object
+  const currentStepIndex = course.step;
+  console.log(currentStepIndex);
+
 
   const handleComplete = async () => {
     setStepCompleted(true);
