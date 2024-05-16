@@ -8,7 +8,7 @@ import { UserContext } from "../../../UserContext";
 const CourseContent = ({ course }) => {
   const [currentContentIndex, setCurrentContentIndex] = useState(course?.step || 0); // Initialize current step with course.currentStep or 0
   const [stepCompleted, setStepCompleted] = useState(false);
-  const [courseCompleted, setCourseCompleted] = useState(false); 
+  const [courseCompleted, setCourseCompleted] = useState(false);
   const { courseId } = course;
   const { courseContent, name } = courseId;
   const { user } = useContext(UserContext);
@@ -52,8 +52,8 @@ const CourseContent = ({ course }) => {
           `http://localhost:7071/api/courseManagement/saveProgress`,
           {
             userId: user?.id,
-            courseId: courseId,
-            stepIndex: currentContentIndex,
+            courseId: courseId._id,
+            step: currentContentIndex,
           },
           {
             headers: {
@@ -103,15 +103,18 @@ const CourseContent = ({ course }) => {
       <div className="mb-8">
         <h2 className="text-lg font-mon font-semibold">Content {currentContentIndex + 1}</h2>
         <div className="mb-4">
-          <iframe
-            width="100%"
-            height="400"
-            src={`https://www.youtube.com/embed/${courseContent[currentContentIndex].videoLink.split("=")[1]}`}
-            title="YouTube video player"
-            frameBorder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowFullScreen
-          ></iframe>
+          <div className="border md:px-5 flex flex-row justify-center">
+            <iframe
+              width="60%"
+              height="500"
+              src={`https://www.youtube.com/embed/${courseContent[currentContentIndex].videoLink.split("=")[1]}`}
+              title="YouTube video player"
+              frameBorder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+            ></iframe>
+          </div>
+
           <p className="my-4 text-xl font-mono font-semibold">Instructions:</p>
           <ul>
             {courseContent[currentContentIndex].instructions.map((instruction, i) => (
@@ -139,24 +142,22 @@ const CourseContent = ({ course }) => {
           ) : (
             <button
               onClick={handleComplete}
-              className={`bg-blue-300 rounded-xl text-slate-600 font-semibold px-4 py-2  hover:bg-blue-400 focus:outline-none ${
-                stepCompleted ? "cursor-not-allowed" : ""
-              }`}
+              className={`bg-blue-300 rounded-xl text-slate-600 font-semibold px-4 py-2  hover:bg-blue-400 focus:outline-none ${stepCompleted ? "cursor-not-allowed" : ""
+                }`}
               disabled={stepCompleted}
             >
               {currentContentIndex === courseContent.length - 1
                 ? "Finished"
                 : stepCompleted
-                ? "Completed"
-                : "Complete Step"}
+                  ? "Completed"
+                  : "Complete Step"}
             </button>
           )}
           <button
             onClick={handleNext}
             disabled={!stepCompleted}
-            className={`bg-blue-500 rounded-xl  text-white px-4 py-2   hover:bg-blue-600  focus:outline-none ${
-              stepCompleted ? "" : "opacity-50 pointer-events-none"
-            }`}
+            className={`bg-blue-500 rounded-xl  text-white px-4 py-2   hover:bg-blue-600  focus:outline-none ${stepCompleted ? "" : "opacity-50 pointer-events-none"
+              }`}
           >
             Next <FaFastForward />
           </button>
