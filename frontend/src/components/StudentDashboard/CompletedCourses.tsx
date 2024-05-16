@@ -15,17 +15,22 @@ interface Course {
   img: string;
 }
 
-export default function CompletedCourses() {
+interface CompletedCoursesProps {
+  userId: string | undefined; // Define prop type
+}
+
+export default function CompletedCourses({ userId }: CompletedCoursesProps) {
   const [courses, setCourses] = useState<Course[]>([]);
   const token = localStorage.getItem("token");
   // const user = localStorage.getItem("userData");
 
   const { user } = useContext(UserContext);
+  console.log(user);
 
   useEffect(() => {
     async function fetchCourses() {
       try {
-        const response = await fetch(`http://localhost:7071/api/courseManagement/completedCourses/663fc86076fc281a8476bf90`, {
+        const response = await fetch(`http://localhost:7071/api/courseManagement/completedCourses/${userId}`, {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
