@@ -56,7 +56,7 @@ const registerUser = async (userData) => {
 
     return {
       user: res,
-      message: "User registered successfully !",
+      message: "User registered successfully!",
     };
   } catch (error) {
     throw new Error("Failed to register the user");
@@ -77,7 +77,7 @@ const loginUser = async (email, password) => {
     }
 
     try {
-      //send email to user
+      //send an email to the user
       const subject = "Login Successful";
       const text = `Welcome ${user.firstName} ${user.lastName}, you have successfully logged in.`;
       const html = `
