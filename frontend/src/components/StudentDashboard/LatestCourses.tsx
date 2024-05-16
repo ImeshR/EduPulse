@@ -1,39 +1,44 @@
-import React from "react";
-import { Box, Flex, Button } from "@chakra-ui/react";
+import React, { useEffect, useState } from "react";
+import { Flex, Button } from "@chakra-ui/react";
 import Card from "../Home/Courses/Card";
+import { Carousel } from "antd";
+
+interface Course {
+  _id: string;
+  name: string;
+  description: string;
+  price: string;
+  img: string;
+}
 
 const LatestCourses = () => {
-  const latestCourses = [
-    {
-      _id: 1,
-      title: "Node.js Course",
-      category: "Web Development",
-      description: "Learn Node.js for backend development.",
-      img: "/nodejs.png",
-    },
-    {
-      _id: 2,
-      title: "Python Course",
-      category: "Software Development",
-      description: "Master Python programming for various applications.",
-      img: "/python.png",
-    },
-    {
-      _id: 3,
-      title: "React Native Course",
-      category: "Mobile Development",
-      description: "Build mobile apps with React Native.",
-      img: "/react-native.png",
-    },
-    {
-      _id: 4,
-      title: "Machine Learning Course",
-      category: "Data Science",
-      description: "Explore machine learning algorithms and techniques.",
-      img: "/machine-learning.png",
-    },
-  ];
 
+  const [courses, setCourses] = useState<Course[]>([]);
+  const token = localStorage.getItem("token");
+
+  useEffect(() => {
+    async function fetchCourses() {
+      try {
+        const response = await fetch("http://localhost:7071/api/courseManagement/getAll", {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: ` Bearer ${token}`,
+          },
+        });
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        const responseData = await response.json();
+        const data = responseData.data;
+        setCourses(data);
+      } catch (error) {
+        console.error("Error fetching courses:", error);
+      }
+    }
+
+    fetchCourses();
+  }, [token]);
   const showMoreHandler = () => {
     // Assuming you use React Router for routing
     // Replace '/allcourses' with the actual route to the AllCourses page
@@ -43,12 +48,20 @@ const LatestCourses = () => {
   return (
     <div className="mt-10 min-h-screen">
       <h1 className="text-4xl  text-gray-700 font-extrabold px-20">Recomand For you</h1>
-      <Flex justifyContent="center" mt={4}>
-        {latestCourses.slice(0, 4).map(course => (
-          <Box key={course._id} width="250px" height="450px" m={2}>
-            <Card {...course} />
-          </Box>
-        ))}
+      <Flex direction="column" width="80%" p="20px" m="auto">
+        <Carousel slidesToShow={4}>
+          {courses.map((course) => (
+            <div key={course._id}>
+              <Card
+                _id={course._id}
+                name={course.name}
+                description={course.description}
+                price={course.price}
+                img={course.img}
+              />
+            </div>
+          ))}
+        </Carousel>
       </Flex>
       <Flex justifyContent="center" mt={4}>
         <Button colorScheme="blue" onClick={showMoreHandler}>
