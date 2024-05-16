@@ -2,21 +2,25 @@ import React, { useState, useContext } from "react";
 import { RiShoppingCartLine, RiSearchLine } from "react-icons/ri";
 import { Link } from "react-router-dom";
 import { UserContext } from "../../UserContext";
-
 import UserMenu from "./UserMenu";
 
 function HeaderPrimary() {
   const [searchQuery, setSearchQuery] = useState("");
-  const { user } = useContext(UserContext); // Access user data from UserContext
+  const { user, setUserData } = useContext(UserContext); // Access user data and logout function from UserContext
 
   const handleSearch = (e) => {
     if (e.key === "Enter") {
       window.location.href = `/search-results?search=${searchQuery}`;
     }
   };
- 
 
-
+  const handleLogout = () => {
+    // Clear user data from context and localStorage
+    setUserData(null);
+    localStorage.removeItem('token');
+    // Refresh the page to reflect changes
+    window.location.reload();
+  };
 
   return (
     <div>
@@ -79,6 +83,7 @@ function HeaderPrimary() {
               <div className="pl-4">
                 <UserMenu />
               </div>
+              <button className="logout-button mx-5" onClick={handleLogout}>Logout</button>
             </>
           ) : (
             <div className="right flex font-sans items-center">
