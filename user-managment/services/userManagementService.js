@@ -1,3 +1,4 @@
+import e from "express";
 import User from "../models/Users.js";
 
 //get all users
@@ -44,15 +45,21 @@ const getUserCountByRole = async () => {
 };
 
 //update user by id
-const updateUser = async () => {
+const updateUser = async (id, updatedUser) => {
   try {
-    const { id } = req.params;
-    const { firstName, lastName, email, role } = req.body;
-    const updatedUser = { firstName, lastName, email, role };
-    const response = await User.findByIdAndUpdate(id, updatedUser, {
-      new: true,
-    });
-    return response;
+    const { firstName, lastName, email, role } = updatedUser;
+    const response = await User.findByIdAndUpdate(
+      id,
+      { firstName, lastName, email, role },
+
+      {
+        new: true,
+      }
+    );
+    return {
+      message: "User updated successfully",
+      response: response,
+    };
   } catch (error) {
     return {
       message: "Failed to update user",
@@ -61,16 +68,24 @@ const updateUser = async () => {
 };
 
 //remove user by id
-const removeUser = async () => {
+const removeUser = async (id) => {
   try {
-    const { id } = req.params;
     const response = await User.findByIdAndDelete(id);
-    return response;
+    return {
+      message: "User deleted successfully",
+    };
   } catch (error) {
     return {
       message: "Failed to delete user",
+      error: error.message,
     };
   }
 };
 
-export { getAllUsers, findUserById ,updateUser, removeUser, getUserCountByRole };
+export {
+  getAllUsers,
+  findUserById,
+  updateUser,
+  removeUser,
+  getUserCountByRole,
+};
