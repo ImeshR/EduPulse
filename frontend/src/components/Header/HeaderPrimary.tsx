@@ -14,10 +14,6 @@ function HeaderPrimary() {
     }
   };
 
-  const userRole = user ? user.role : null;
-  console.log("nnnnnnnn",userRole);
-
-
   const handleLogout = () => {
     // Clear user data from context and localStorage
     setUserData(null);
@@ -85,10 +81,8 @@ function HeaderPrimary() {
                 <RiShoppingCartLine className="icon" />
               </div>
               <div className="pl-4">
-              <UserMenu role={userRole} />
-
+                <UserMenu role={user.role} handleLogout={handleLogout} />
               </div>
-              <button className="logout-button mx-5" onClick={handleLogout}>Logout</button>
             </>
           ) : (
             <div className="right flex font-sans items-center">

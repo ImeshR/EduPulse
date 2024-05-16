@@ -1,15 +1,9 @@
 import React from "react";
-import {
-  Menu,
-  MenuButton,
-  MenuList,
-  MenuItem,
-  Button,
-} from "@chakra-ui/react";
+import { Menu, MenuButton, MenuList, MenuItem, Button } from "@chakra-ui/react";
 import { FaUserGraduate } from "react-icons/fa6";
 import { Link } from "react-router-dom";
 
-const UserMenu = ({ role }) => {
+const UserMenu = ({ role, handleLogout }) => {
   return (
     <Menu>
       <MenuButton
@@ -34,7 +28,7 @@ const UserMenu = ({ role }) => {
             </Link>
           </>
         )}
-        <MenuItem>Logout</MenuItem>
+        <MenuItem onClick={handleLogout}>Logout</MenuItem>
       </MenuList>
     </Menu>
   );

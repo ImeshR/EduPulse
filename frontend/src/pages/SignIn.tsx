@@ -26,10 +26,11 @@ export default function SignIn() {
         icon: 'success',
         confirmButtonText: 'Continue',
       });
-
+  
       // Save token in local storage
       localStorage.setItem('token', response.data.token);
       navigate('/');
+      window.location.reload(); // Reload the page after navigation
     } catch (error) {
       // Display error alert
       Swal.fire({
@@ -42,6 +43,7 @@ export default function SignIn() {
       setLoading(false); // Set loading to false when sign-in process finishes
     }
   };
+  
 
   return (
     <>
