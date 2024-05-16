@@ -260,6 +260,8 @@ const saveCourseProgress = async (userId, courseId, step) => {
   }
 
   userEnrollment.step = step;
+
+  console.log(userEnrollment.step);
   await userEnrollment.save();
 
   return {

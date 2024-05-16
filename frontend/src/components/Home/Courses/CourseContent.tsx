@@ -52,8 +52,8 @@ const CourseContent = ({ course }) => {
           `http://localhost:7071/api/courseManagement/saveProgress`,
           {
             userId: user?.id,
-            courseId: courseId,
-            stepIndex: currentContentIndex,
+            courseId: courseId._id,
+            step: currentContentIndex,
           },
           {
             headers: {
