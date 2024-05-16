@@ -36,6 +36,8 @@ const AllPaymentData = () => {
     fetchPaymentData();
   }, []);
 
+  console.log(payments);
+
   const sortPaymentsByDate = (option) => {
     let sortedData = [...payments];
     switch (option) {
@@ -133,30 +135,31 @@ const AllPaymentData = () => {
             </tr>
           </thead>
           <tbody className="bg-white divide-y divide-gray-200">
-            {sortedPayments.map((payment) => (
-              <tr key={payment.transactionId}>
-                <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{payment.courseId.name}</td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500"><img src={payment.courseId.img} alt={payment.courseId.name} className="h-10 w-10 object-cover" /></td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{payment.transactionId}</td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{payment.userId.firstName} {payment.userId.lastName}</td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{payment.userId.email}</td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{payment.amount / 100}</td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{payment.status}</td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                  {payment.status !== 'refunded' ? (
-                    <button
-                      onClick={() => handleRefund(payment.userId._id, payment.transactionId)}
-                      disabled={refundLoading === payment.transactionId}
-                      className="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600 focus:outline-none"
-                    >
-                      {refundLoading === payment.transactionId ? 'Processing...' : 'Refund'}
-                    </button>
-                  ) : (
-                    'Refunded'
-                  )}
-                </td>
-              </tr>
-            ))}
+          {sortedPayments.map((payment) => (
+  <tr key={payment.transactionId}>
+    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{payment.courseId ? payment.courseId.name : 'N/A'}</td>
+    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500"><img src={payment.courseId ? payment.courseId.img : ''} alt={payment.courseId ? payment.courseId.name : ''} className="h-10 w-10 object-cover" /></td>
+    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{payment.transactionId}</td>
+    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{payment.userId ? `${payment.userId.firstName} ${payment.userId.lastName}` : 'N/A'}</td>
+    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{payment.userId ? payment.userId.email : 'N/A'}</td>
+    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{payment.amount / 100}</td>
+    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{payment.status}</td>
+    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+      {payment.status !== 'refunded' ? (
+        <button
+          onClick={() => handleRefund(payment.userId._id, payment.transactionId)}
+          disabled={refundLoading === payment.transactionId}
+          className="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600 focus:outline-none"
+        >
+          {refundLoading === payment.transactionId ? 'Processing...' : 'Refund'}
+        </button>
+      ) : (
+        'Refunded'
+      )}
+    </td>
+  </tr>
+))}
+
           </tbody>
         </table>
       </div>
