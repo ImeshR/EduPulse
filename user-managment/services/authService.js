@@ -59,7 +59,7 @@ const registerUser = async (userData) => {
       message: "User registered successfully !",
     };
   } catch (error) {
-    throw new Error("Failed to register user");
+    throw new Error("Failed to register the user");
   }
 };
 
