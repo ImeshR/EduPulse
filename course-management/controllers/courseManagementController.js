@@ -159,9 +159,9 @@ router.get("/enrolledCourses/:userId/:courseId", async (req, res) => {
 });
 
 //save course progress with user id, course id and step
-router.post("/saveProgress/:userId/:courseId/:step", async (req, res) => {
+router.post("/saveProgress", async (req, res) => {
   try {
-    const { userId, courseId, step } = req.params;
+    const { userId, courseId, step } = req.body;
     const course = await saveCourseProgress(userId, courseId, step);
     res.json(course);
   } catch (error) {
@@ -170,9 +170,9 @@ router.post("/saveProgress/:userId/:courseId/:step", async (req, res) => {
 });
 
 //completed course
-router.post("/completedCourse/:userId/:courseId", async (req, res) => {
+router.post("/completedCourse", async (req, res) => {
   try {
-    const { userId, courseId } = req.params;
+    const { userId, courseId } = req.body;
     const course = await saveCompletedCourse(userId, courseId);
     res.json(course);
   } catch (error) {

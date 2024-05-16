@@ -294,7 +294,6 @@ const saveCompletedCourse = async (userId, courseId) => {
   userEnrollment.step = courseContentLength;
 
   await userEnrollment.save();
-  console.log(course.data.name);
 
   try {
     //send email

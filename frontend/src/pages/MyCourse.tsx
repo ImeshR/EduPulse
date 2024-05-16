@@ -1,56 +1,58 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import CourseContent from "../components/Home/Courses/CourseContent";
 import MyCourseSideBar from "../components/Home/Courses/MyCourseSideBar";
+import { useParams } from "react-router-dom";
+import axios from "axios";
 
 const MyCourse = () => {
+  const { userId, courseId } = useParams();
+  const [course, setCourse] = useState(null);
+  const token = localStorage.getItem("token");
 
-  const course = {
-    name: "Java Programming Masterclass",
-    description: "Learn Java programming from scratch and become a Java developer.",
-    createdBy: "John Doe",
-    price: 49.99,
-    duration: 45,
-    courseContent: [
-      {
-        videoLink: "https://www.youtube.com/watch?v=KkMDCCdjyW8",
-        instructions: ["Watch the video", "Take notes"],
-        _id: "663bcd0df519efe13823c884"
-      },
-      {
-        videoLink: "https://www.youtube.com/watch?v=eIrMbAQSU34",
-        instructions: ["Watch the video", "Complete exercises"],
-        _id: "663bcd0df519efe13823c885"
-      },
-      {
-        videoLink: "https://www.youtube.com/watch?v=jWT-AX9677k",
-        instructions: ["Watch the video", "Do coding challenges"],
-        _id: "663bcd0df519efe13823c886"
-      },
-      {
-        videoLink: "https://www.youtube.com/watch?v=GoXwIVyNvX0",
-        instructions: ["Watch the video", "Work on a project"],
-        _id: "663bcd0df519efe13823c887"
-      },
-      {
-        videoLink: "https://www.youtube.com/watch?v=GoXwIVyNvX0",
-        instructions: ["Watch the video", "Work on a project"],
-        _id: "663bcd0df519efe13823c887"
+  console.log(userId, courseId);
+
+  useEffect(() => {
+    document.title = "My Course";
+
+    const fetchCourse = async () => {
+      try {
+        const response = await axios.get(`http://localhost:7071/api/courseManagement/enrolledCourses/${userId}/${courseId}`, {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        if (response.data) {
+          console.log(response.data);
+          setCourse(response.data);
+        }
+      } catch (error) {
+        console.error("Error fetching course:", error);
       }
-    ],
-    _id: "663bcd0df519efe13823c883",
-    __v: 0
-  };
+    };
+
+    if (userId && courseId) {
+      fetchCourse();
+    }
+  }, [userId, courseId, token]);
+
+  if (!course) {
+    return <div>Loading...</div>;
+  }
+
+  
 
   return (
     <div className="grid grid-cols-5 gap-4">
       <div className="col-span-1">
-        <MyCourseSideBar course={course} />
+        {course && <MyCourseSideBar course={course} />}
       </div>
       <div className="col-span-4">
-        <CourseContent course={course} />
+        {course && <CourseContent course={course} />}
       </div>
     </div>
   );
+  
 };
 
 export default MyCourse;
